@@ -28,7 +28,7 @@ export default function LandingPage() {
       feature1: "Smart Media Drops",
       desc1: "Content appears automatically on the right timeline.",
       feature2: "One-Click Commerce",
-      desc2: "Sell directly from your followers' calendar.",
+      desc2: "Sell directly from your followers’ calendar.",
       feature3: "Global Sync",
       desc3: "Reach fans in every timezone, from the West to China."
     },
@@ -51,7 +51,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navbar */}
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto">
         <div className="flex items-center gap-2 group cursor-pointer">
           <Infinity className="text-slate-900 w-10 h-10 transition-transform group-hover:rotate-12" />
@@ -70,7 +69,6 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="max-w-7xl mx-auto px-6 pt-16 pb-24 text-center">
         <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-medium mb-8">
           <Zap size={16} /> {current.badge}
@@ -88,12 +86,11 @@ export default function LandingPage() {
             placeholder="E-mailadres" 
             className="flex-1 px-8 py-5 rounded-full border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none text-lg transition-all"
           />
-          <button className="bg-slate-900 text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-indigo-600 transition-all shadow-xl flex items-center justify-center gap-2">
+          <button type="button" className="bg-slate-900 text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-indigo-600 transition-all shadow-xl flex items-center justify-center gap-2">
             {current.cta} <ArrowRight size={20} />
           </button>
         </div>
 
-        {/* Visual Mockup Section */}
         <div className="relative max-w-5xl mx-auto group">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500 to-emerald-400 opacity-20 blur-3xl rounded-full group-hover:opacity-30 transition-opacity"></div>
           <div className="relative bg-slate-900 rounded-[2.5rem] p-4 shadow-2xl border-8 border-slate-800">
@@ -108,6 +105,29 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Value Props */}
       <section className="py-32 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6 grid md
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-16">
+          {[
+            { icon: <Zap />, title: current.feature1, desc: current.desc1 },
+            { icon: <ShoppingBag />, title: current.feature2, desc: current.desc2 },
+            { icon: <Globe />, title: current.feature3, desc: current.desc3 }
+          ].map((f, i) => (
+            <div key={i} className="flex flex-col items-start">
+              <div className="w-14 h-14 bg-white rounded-2xl shadow-sm flex items-center justify-center text-indigo-600 mb-6 border border-slate-100">
+                {f.icon}
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-slate-900">{f.title}</h3>
+              <p className="text-slate-500 leading-relaxed text-lg">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <footer className="py-20 text-center border-t border-slate-100">
+        <p className="text-slate-400 font-medium tracking-widest uppercase text-xs">
+          © 2026 SyncSocial.ai — Built for the next generation of creators.
+        </p>
+      </footer>
+    </div>
+  );
+}
