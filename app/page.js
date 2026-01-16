@@ -92,7 +92,7 @@ export default function LandingPage() {
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
         <div className="flex items-center gap-2 group cursor-pointer">
           <Infinity className="text-indigo-950 w-10 h-10 transition-transform group-hover:rotate-12" />
-          <span className="text-2xl font-black tracking-tighter text-indigo-950 italic tracking-tighter">SyncSocial<span className="text-indigo-600">.ai</span></span>
+          <span className="text-2xl font-black tracking-tighter text-indigo-950 italic">SyncSocial<span className="text-indigo-600">.ai</span></span>
         </div>
         <div className="flex bg-slate-100 p-1 rounded-full border border-slate-200 shadow-sm">
           {['NL', 'EN', 'CN'].map((l) => (
@@ -112,10 +112,10 @@ export default function LandingPage() {
           {current.sub}
         </p>
         
-        {/* Fixed Email Form: Perfect Centering & Height Matching */}
-        <div className="w-full max-w-xl mb-32 h-20 flex justify-center items-center">
+        {/* Fixed Email Form: Centered and Height Matched */}
+        <div className="w-full max-w-xl mx-auto mb-32">
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2 w-full animate-fade-in items-stretch justify-center">
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row w-full animate-fade-in">
               <input 
                 type="email" required value={email} onChange={(e) => setEmail(e.target.value)}
                 placeholder={lang === 'CN' ? '电子邮件' : (lang === 'NL' ? 'E-mailadres' : 'Email address')} 
@@ -126,14 +126,14 @@ export default function LandingPage() {
               </button>
             </form>
           ) : (
-            <div className="bg-emerald-50 border-2 border-emerald-100 h-20 px-8 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg shadow-emerald-100">
+            <div className="bg-emerald-50 border-2 border-emerald-100 h-16 px-8 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg shadow-emerald-100">
               <CheckCircle2 size={24} className="text-emerald-500" />
               <p className="text-emerald-800 font-black text-lg text-left leading-tight">{current.success}</p>
             </div>
           )}
         </div>
 
-        {/* Mockup Simulation Section */}
+        {/* Mockup Simulation */}
         <div className="relative w-full max-w-4xl group">
           <div className="absolute -inset-20 bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 opacity-20 blur-[120px] rounded-full group-hover:opacity-30 transition-opacity duration-1000"></div>
           <div className="relative bg-indigo-950 rounded-[3.5rem] p-4 shadow-2xl border-[14px] border-indigo-900 overflow-hidden ring-1 ring-white/10">
@@ -142,7 +142,7 @@ export default function LandingPage() {
               <div className="bg-white border-b border-slate-100 p-6 flex justify-between items-center">
                 <div className="flex items-center gap-3 text-left">
                   <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white shadow-lg">MS</div>
-                  <div className="leading-tight">
+                  <div className="leading-tight text-left">
                     <p className="font-black text-indigo-950">Maxime & Sophie</p>
                     <p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1"><ShieldCheck size={10} /> {current.m_status}</p>
                   </div>
@@ -154,4 +154,15 @@ export default function LandingPage() {
                 {currentSlide === 0 && (
                   <div className="animate-fade-in text-left">
                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 font-bold">{current.m_today}</p>
-                    <div className="p-6 bg-white border-2 border-indigo-100 rounded-[2rem]
+                    <div className="p-6 bg-white border-2 border-indigo-100 rounded-[2rem] shadow-sm flex items-center gap-5">
+                       <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-100"><ShoppingBag size={28} /></div>
+                       <div className="text-left"><p className="font-black text-indigo-950 text-xl tracking-tight">{current.m_event1}</p><p className="text-xs font-bold text-slate-400 tracking-tight">{current.m_event1_sub}</p></div>
+                    </div>
+                  </div>
+                )}
+                {currentSlide === 1 && (
+                  <div className="animate-fade-in text-left">
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-6 font-bold">{current.m_week}</p>
+                    <div className="space-y-4">
+                      <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
+                         <div className="w-10 h-10 bg-
