@@ -1,11 +1,9 @@
-
-import { NextResponse } from 'SyncSocial <onboarding@resend.dev>',
+import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
     const { email } = await req.json();
     
-    // We gebruiken fetch om direct met de Resend API te praten
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -13,7 +11,7 @@ export async function POST(req) {
         'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: 'SyncSocial <onboarding@resend.dev>', // Gebruik dit exact zolang je domein niet geverifieerd is
+        from: 'SyncSocial <onboarding@resend.dev>',
         to: [email],
         subject: 'Welcome to SyncSocial.ai!',
         html: `
@@ -28,16 +26,13 @@ export async function POST(req) {
       }),
     });
 
-    const data = await res.json();
-
     if (res.ok) {
       return NextResponse.json({ success: true });
     } else {
-      console.error("Resend Error:", data);
-      return NextResponse.json({ error: 'Failed to send' }, { status: 500 });
+      const errorData = await res.json();
+      return NextResponse.json({ error: 'Resend rejected request', details: errorData }, { status: 500 });
     }
   } catch (err) {
-    console.error("API Error:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
