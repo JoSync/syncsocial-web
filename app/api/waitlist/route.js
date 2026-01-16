@@ -21,7 +21,7 @@ export async function POST(req) {
         'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: 'SyncSocial <onboarding@resend.dev>',
+        from: 'SyncSocial <hello@syncsocial.ai>',
         to: [email],
         subject: 'Welcome to SyncSocial.ai!',
         html: `<p>Welcome to the waitlist for SyncSocial.ai!</p>`,
