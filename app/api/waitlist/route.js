@@ -1,5 +1,5 @@
 
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'SyncSocial <onboarding@resend.dev>';
 
 export async function POST(req) {
   try {
