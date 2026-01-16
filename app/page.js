@@ -23,7 +23,7 @@ export default function LandingPage() {
       badge: "SyncSocial.ai — The future of engagement",
       step1: "Connect", step1d: "Link your socials & store.",
       step2: "Sync", step2d: "AI builds your schedule.",
-      step3: "Grow", step3d: "Leid fans naar sales.",
+      step3: "Grow", step3d: "Lead fans to revenue.",
       fTitle: "Platform Features",
       f1: "Direct Commerce", f1d: "Sell merch directly through calendar events.",
       f2: "Global AI Timing", f2d: "Optimized drops for every timezone.",
@@ -81,12 +81,22 @@ export default function LandingPage() {
         <h1 className="text-5xl lg:text-8xl font-black tracking-tighter text-indigo-950 mb-8 leading-[0.95] max-w-5xl">{current.hero}</h1>
         <p className="text-xl text-slate-500 max-w-2xl mx-auto mb-12 font-medium italic">{current.sub}</p>
         
-        {/* Email Form: 50/50 Split for Perfect Symmetry */}
+        {/* Email Form: Restored Width (2:1 ratio) and Matched Height (h-20) */}
         <div className="w-full max-w-xl mx-auto mb-32 flex flex-col items-center">
           {!isSubmitted ? (
             <form onSubmit={(e) => { e.preventDefault(); setIsSubmitted(true); }} className="flex flex-col sm:flex-row w-full animate-fade-in shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-[2.5rem] overflow-hidden border border-slate-100 mb-6 bg-white">
-              <input type="email" required placeholder={lang === 'CN' ? '电子邮件' : (lang === 'NL' ? 'E-mailadres' : 'Email address')} className="flex-1 h-20 px-10 outline-none text-lg bg-slate-50 focus:bg-white transition-all text-center sm:text-left border-b-2 sm:border-b-0 sm:border-r-2 border-white" />
-              <button type="submit" className="flex-1 h-20 bg-indigo-950 text-white px-10 font-black text-lg hover:bg-indigo-800 transition-all flex items-center justify-center gap-3 uppercase tracking-tighter">{current.cta} <ArrowRight size={22} /></button>
+              <input 
+                type="email" 
+                required 
+                placeholder={lang === 'CN' ? '电子邮件' : (lang === 'NL' ? 'E-mailadres' : 'Email address')} 
+                className="flex-[2] h-20 px-10 outline-none text-lg bg-slate-50 focus:bg-white transition-all text-left border-b sm:border-b-0 sm:border-r border-slate-100" 
+              />
+              <button 
+                type="submit" 
+                className="flex-1 h-20 bg-indigo-950 text-white px-10 font-black text-lg hover:bg-indigo-800 transition-all flex items-center justify-center gap-3 uppercase tracking-tighter"
+              >
+                {current.cta} <ArrowRight size={22} />
+              </button>
             </form>
           ) : (
             <div className="bg-emerald-50 border-2 border-emerald-100 h-20 px-10 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg mb-6">
@@ -102,27 +112,30 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Mockup */}
+        {/* Mockup Simulation */}
         <div className="relative w-full max-w-3xl">
           <div className="absolute -inset-10 bg-indigo-400/20 blur-[100px] rounded-full animate-pulse"></div>
           <div className="relative bg-indigo-950 rounded-[3.5rem] p-3 shadow-2xl border-[12px] border-indigo-900 overflow-hidden">
             <div className="bg-white rounded-[2.5rem] overflow-hidden h-[600px] flex flex-col relative">
               <div className="bg-white border-b border-slate-100 p-6 flex justify-between items-center text-left sticky top-0 z-10">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white">MS</div>
-                  <div><p className="font-black text-indigo-950 text-sm leading-none tracking-tight">Maxime & Sophie</p><p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1 mt-1"><ShieldCheck size={10} /> {current.m_status}</p></div>
+                  <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white shadow-lg">MS</div>
+                  <div className="text-left leading-tight">
+                    <p className="font-black text-indigo-950 text-sm leading-none tracking-tight">Maxime & Sophie</p>
+                    <p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1 mt-1"><ShieldCheck size={10} /> {current.m_status}</p>
+                  </div>
                 </div>
                 <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600"><Globe size={20} /></div>
               </div>
               <div className="flex-1 relative p-8">
                 {currentSlide === 0 && <div className="animate-fade-in text-left">
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">{current.m_today}</p>
-                  <div className="p-6 bg-indigo-50 border-2 border-indigo-100 rounded-3xl shadow-sm flex items-center gap-4">
+                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 font-bold">{current.m_today}</p>
+                  <div className="p-6 bg-indigo-50 border-2 border-indigo-100 rounded-3xl shadow-sm flex items-center gap-4 text-left">
                     <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white"><ShoppingBag size={24} /></div>
-                    <div><p className="font-black text-indigo-950 text-lg leading-none">{current.m_event1}</p><p className="text-[10px] font-bold text-indigo-400 mt-1 uppercase">14:00 GMT</p></div>
+                    <div className="text-left"><p className="font-black text-indigo-950 text-lg leading-none">{current.m_event1}</p><p className="text-[10px] font-bold text-indigo-400 mt-1 uppercase">14:00 GMT</p></div>
                   </div>
                 </div>}
-                {currentSlide === 1 && <div className="animate-fade-in text-left"><p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 italic">Weekly Overview</p><div className="space-y-3">{[1,2].map(i => <div key={i} className="h-14 bg-slate-50 rounded-2xl border flex items-center px-4 gap-4"><div className="w-8 h-8 rounded-full bg-white border"></div><div className="h-2 w-24 bg-slate-200 rounded-full"></div></div>)}</div></div>}
+                {currentSlide === 1 && <div className="animate-fade-in text-left"><p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 italic font-bold">Weekly Overview</p><div className="space-y-3">{[1,2].map(i => <div key={i} className="h-14 bg-slate-50 rounded-2xl border flex items-center px-4 gap-4"><div className="w-8 h-8 rounded-full bg-white border"></div><div className="h-2 w-24 bg-slate-200 rounded-full"></div></div>)}</div></div>}
                 {currentSlide === 2 && <div className="animate-fade-in flex flex-col items-center justify-center h-full text-center">
                   <div className="relative mb-6">
                     <div className="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-black px-3 py-1 rounded-full animate-pulse">{current.m_live}</div>
@@ -157,7 +170,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features Grid - REINTRODUCED & REFINED */}
+      {/* Features Grid */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -170,13 +183,10 @@ export default function LandingPage() {
               { icon: <BarChart3 />, title: current.f2, desc: current.f2d },
               { icon: <ShieldCheck />, title: current.f3, desc: current.f3d }
             ].map((f, i) => (
-              <div key={i} className="p-12 rounded-[3rem] border-2 border-slate-50 hover:border-indigo-100 transition-all bg-gradient-to-b from-white to-slate-50/50 text-center lg:text-left group">
+              <div key={i} className="p-12 rounded-[3rem] border-2 border-slate-50 hover:border-indigo-100 transition-all bg-gradient-to-b from-white to-slate-50/50 text-left group">
                 <div className="w-14 h-14 bg-indigo-950 text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg shadow-indigo-100 group-hover:scale-110 transition-transform">{f.icon}</div>
                 <h3 className="text-2xl font-black text-indigo-950 mb-4 tracking-tight italic">{f.title}</h3>
-                <p className="text-slate-500 font-medium leading-relaxed">{f.f1d}</p>
-                <div className="mt-8 flex items-center gap-2 text-indigo-600 font-black text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more <ArrowRight size={14} />
-                </div>
+                <p className="text-slate-500 font-medium leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
