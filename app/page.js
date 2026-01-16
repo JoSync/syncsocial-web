@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Calendar, ShoppingBag, Globe, Zap, Infinity, ArrowRight, CheckCircle2, Clock, DollarSign, ChevronRight } from 'lucide-react';
 
 export default function LandingPage() {
-  const [lang, setLang] = useState('NL');
+  const [lang, setLang] = useState('EN');
   const [currentSlide, setCurrentSlide] = useState(0);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
