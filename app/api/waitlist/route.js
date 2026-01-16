@@ -1,38 +1,48 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(req) {
+  console.log("--- START EMAIL POGING ---");
+  
   try {
     const { email } = await req.json();
-    
+    console.log("Ontvangen email van formulier:", email);
+
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("KRITIEKE FOUT: RESEND_API_KEY is niet gevonden in Vercel!");
+      return NextResponse.json({ error: 'Systeeminstelling fout (API Key missing)' }, { status: 500 });
+    }
+    console.log("API Key is aanwezig (begint met:", apiKey.substring(0, 5), "...)");
+
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
         from: 'SyncSocial <onboarding@resend.dev>',
         to: [email],
         subject: 'Welcome to SyncSocial.ai!',
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: auto; border: 1px solid #eee; padding: 40px; border-radius: 20px;">
-            <h1 style="color: #4338ca; font-size: 24px;">Welcome to the future of engagement!</h1>
-            <p>Thanks for joining the <strong>SyncSocial.ai</strong> waitlist.</p>
-            <p>We are currently in a closed beta phase, synchronizing the lives of the world's most innovative creators. You are now officially on the list!</p>
-            <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-            <p style="font-size: 12px; color: #999; text-transform: uppercase; letter-spacing: 1px;">© 2026 SyncSocial.ai — Intelligence Synchronized.</p>
-          </div>
-        `,
+        html: `<p>Welcome to the waitlist for SyncSocial.ai!</p>`,
       }),
     });
 
+    const status = res.status;
+    const data = await res.json();
+    
+    console.log("Resend Status Code:", status);
+    console.log("Resend Antwoord Data:", JSON.stringify(data));
+
     if (res.ok) {
+      console.log("--- SUCCESS: Email verstuurd! ---");
       return NextResponse.json({ success: true });
     } else {
-      const errorData = await res.json();
-      return NextResponse.json({ error: 'Resend rejected request', details: errorData }, { status: 500 });
+      console.error("--- RESEND FOUT ---", data);
+      return NextResponse.json({ error: 'Resend weigert aanvraag', details: data }, { status: status });
     }
   } catch (err) {
+    console.error("--- SYSTEEM FOUT ---", err.message);
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
