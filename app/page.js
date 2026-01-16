@@ -1,16 +1,19 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Calendar, ShoppingBag, Globe, Zap, Infinity, ArrowRight, CheckCircle2, Clock, DollarSign, ChevronRight, ShieldCheck, BarChart3 } from 'lucide-react';
+import { Calendar, ShoppingBag, Globe, Zap, Infinity, ArrowRight, CheckCircle2, Clock, DollarSign, ChevronRight, ShieldCheck, BarChart3, Heart, Users } from 'lucide-react';
 
 export default function LandingPage() {
   const [lang, setLang] = useState('EN'); 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [viewers, setViewers] = useState(12400);
 
+  // Auto-scroll slides en viewer count simulatie
   useEffect(() => {
-    const interval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % 3), 5000);
-    return () => clearInterval(interval);
+    const slideInterval = setInterval(() => setCurrentSlide((prev) => (prev + 1) % 4), 5000);
+    const viewerInterval = setInterval(() => setViewers(v => v + Math.floor(Math.random() * 50)), 2000);
+    return () => { clearInterval(slideInterval); clearInterval(viewerInterval); };
   }, []);
 
   const t = {
@@ -22,8 +25,9 @@ export default function LandingPage() {
       featTitle: "Why creators choose SyncSocial",
       f1: "Direct Commerce", f1d: "Sell products directly through calendar events.",
       f2: "Global AI Timing", f2d: "AI drops content when fans are most active.",
-      f3: "Owned Audience", f3d: "A direct, private line to your most loyal community.",
-      m_status: "Verified Creator", m_today: "Today", m_event1: "Merch Drop", m_week: "Next Week", m_ai: "AI Revenue Pulse"
+      f3: "Owned Audience", f3d: "A direct, private line to your community.",
+      m_status: "Verified Creator", m_today: "Today", m_event1: "Merch Drop", 
+      m_week: "Next Week", m_ai: "AI Revenue Pulse", m_live: "Live Now", m_viewers: "Viewers"
     },
     NL: {
       hero: "Jouw leven, gesynchroniseerd met je community.",
@@ -34,7 +38,8 @@ export default function LandingPage() {
       f1: "Directe Verkoop", f1d: "Verkoop merch direct vanuit de agenda.",
       f2: "Wereldwijde AI Timing", f2d: "AI dropt content als fans écht actief zijn.",
       f3: "Eigen Community", f3d: "Een directe, private lijn met je volgers.",
-      m_status: "Geverifieerde Creator", m_today: "Vandaag", m_event1: "Merch Drop", m_week: "Volgende Week", m_ai: "AI Omzet Pulse"
+      m_status: "Geverifieerde Creator", m_today: "Vandaag", m_event1: "Merch Drop", 
+      m_week: "Volgende Week", m_ai: "AI Omzet Pulse", m_live: "Nu Live", m_viewers: "Kijkers"
     },
     CN: {
       hero: "同步你的社交生活",
@@ -44,15 +49,16 @@ export default function LandingPage() {
       featTitle: "为什么选择 SyncSocial",
       f1: "直接商业化", f1d: "直接通过日历事件销售产品。",
       f2: "全球AI时机", f2d: "AI在粉丝最活跃时精准投放内容。",
-      f3: "私域流量", f3d: "连接忠实粉丝的最直接、私密的渠道。",
-      m_status: "认证创作者", m_today: "今日", m_event1: "周边上新", m_week: "本周预告", m_ai: "AI 营收脉搏"
+      f3: "私域流量", f3d: "连接忠实粉丝的最直接渠道。",
+      m_status: "认证创作者", m_today: "今日", m_event1: "周边上新", 
+      m_week: "本周预告", m_ai: "AI 营收脉搏", m_live: "直播中", m_viewers: "观看人数"
     }
   };
 
   const current = t[lang];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-x-hidden">
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
         <div className="flex items-center gap-2 group cursor-pointer">
           <Infinity className="text-indigo-950 w-10 h-10 transition-transform group-hover:rotate-12" />
@@ -65,12 +71,13 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <section className="max-w-7xl mx-auto px-6 pt-12 pb-32 text-center flex flex-col items-center">
-        <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-xs font-bold mb-8 uppercase tracking-widest animate-fade-in"><Zap size={14} /> {current.badge}</div>
+      <section className="max-w-7xl mx-auto px-6 pt-12 pb-32 text-center flex flex-col items-center relative">
+        <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-xs font-bold mb-8 uppercase tracking-widest"><Zap size={14} /> {current.badge}</div>
         <h1 className="text-5xl lg:text-8xl font-black tracking-tighter text-indigo-950 mb-8 leading-tight max-w-5xl">{current.hero}</h1>
         <p className="text-xl text-slate-500 max-w-2xl mb-12 font-medium italic">{current.sub}</p>
         
-        <div className="w-full max-w-xl mx-auto mb-32">
+        {/* Centered Email Form */}
+        <div className="w-full max-w-xl mx-auto mb-32 h-20">
           {!isSubmitted ? (
             <form onSubmit={(e) => { e.preventDefault(); setIsSubmitted(true); }} className="flex flex-col sm:flex-row w-full animate-fade-in shadow-2xl rounded-full overflow-hidden border-2 border-slate-100">
               <input type="email" required placeholder={lang === 'CN' ? '电子邮件' : (lang === 'NL' ? 'E-mailadres' : 'Email address')} className="flex-[2] h-16 px-8 outline-none text-lg bg-slate-50 focus:bg-white transition-all" />
@@ -84,54 +91,76 @@ export default function LandingPage() {
           )}
         </div>
 
+        {/* Mockup with 4 Slides */}
         <div className="relative w-full max-w-4xl group">
           <div className="absolute -inset-10 bg-gradient-to-r from-indigo-500 to-emerald-400 opacity-20 blur-[100px] rounded-full group-hover:opacity-30 transition-opacity"></div>
           <div className="relative bg-indigo-950 rounded-[3rem] p-3 shadow-2xl border-[12px] border-indigo-900 overflow-hidden">
             <div className="bg-slate-50 rounded-[2rem] overflow-hidden h-[600px] flex flex-col border border-indigo-800/20">
               <div className="bg-white border-b border-slate-100 p-6 flex justify-between items-center text-left">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white shadow-md">MS</div>
-                  <div><p className="font-black text-indigo-950 text-sm">Maxime & Sophie</p><p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1"><ShieldCheck size={10} /> {current.m_status}</p></div>
+                  <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white">MS</div>
+                  <div><p className="font-black text-indigo-950 text-sm leading-none">Maxime & Sophie</p><p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest flex items-center gap-1 mt-1"><ShieldCheck size={10} /> {current.m_status}</p></div>
                 </div>
-                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600"><Globe size={20} /></div>
+                <div className="w-10 h-10 bg-indigo-50 rounded-full flex items-center justify-center text-indigo-600 shadow-inner"><Globe size={20} /></div>
               </div>
+
               <div className="flex-1 relative p-8">
                 {currentSlide === 0 && <div className="animate-fade-in text-left">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">{current.m_today}</p>
                   <div className="p-6 bg-white border-2 border-indigo-100 rounded-3xl shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white"><ShoppingBag size={24} /></div>
-                    <div><p className="font-black text-indigo-950 text-lg leading-none">{current.m_event1}</p><p className="text-[10px] font-bold text-slate-400 mt-1 uppercase">14:00 GMT</p></div>
+                    <div className="w-14 h-14 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg"><ShoppingBag size={28} /></div>
+                    <div><p className="font-black text-indigo-950 text-xl leading-none">{current.m_event1}</p><p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">14:00 GMT</p></div>
                   </div>
                 </div>}
+
                 {currentSlide === 1 && <div className="animate-fade-in text-left">
                   <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">{current.m_week}</p>
                   <div className="space-y-3">
-                    {['Content Drop', 'Shanghai Live'].map((e, i) => (
+                    {['Summer Campaign', 'Shanghai Live'].map((e, i) => (
                       <div key={i} className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4">
-                        <div className="w-8 h-8 bg-slate-50 rounded-lg border flex items-center justify-center text-indigo-600"><Zap size={16} /></div>
+                        <div className="w-10 h-10 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600 border"><Zap size={18} /></div>
                         <p className="font-bold text-indigo-950 text-sm">{e}</p>
                       </div>
                     ))}
                   </div>
                 </div>}
-                {currentSlide === 2 && <div className="animate-fade-in text-center flex flex-col justify-center h-full">
-                  <div className="w-20 h-20 bg-emerald-500 rounded-3xl mx-auto flex items-center justify-center text-white shadow-xl mb-4"><BarChart3 size={36} /></div>
-                  <p className="text-xl font-black text-indigo-950 italic">{current.m_ai}</p>
-                  <p className="text-emerald-500 font-black uppercase text-[10px] tracking-widest mt-2">Target Achieved</p>
+
+                {currentSlide === 2 && <div className="animate-fade-in flex flex-col items-center justify-center h-full text-center">
+                  <div className="relative mb-6">
+                    <div className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] font-black px-3 py-1 rounded-full animate-pulse uppercase tracking-widest shadow-lg shadow-red-200">{current.m_live}</div>
+                    <div className="w-32 h-32 bg-indigo-950 rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-2xl relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/80 to-transparent"></div>
+                      <Globe size={48} className="text-indigo-400 relative z-10" />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white px-6 py-3 rounded-full border border-slate-100 shadow-xl mb-4">
+                    <Users size={18} className="text-indigo-600" />
+                    <span className="font-black text-indigo-950 text-xl">{viewers.toLocaleString()}</span>
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{current.m_viewers}</span>
+                  </div>
+                  <div className="flex gap-2 animate-bounce"><Heart size={20} className="text-red-500 fill-red-500 opacity-80" /><Heart size={16} className="text-red-400 fill-red-400 opacity-60" /></div>
+                </div>}
+
+                {currentSlide === 3 && <div className="animate-fade-in text-center flex flex-col justify-center h-full">
+                  <div className="w-24 h-24 bg-emerald-500 rounded-[2.5rem] mx-auto flex items-center justify-center text-white shadow-2xl mb-6 shadow-emerald-200"><BarChart3 size={48} /></div>
+                  <p className="text-2xl font-black text-indigo-950 italic tracking-tighter">{current.m_ai}</p>
+                  <p className="text-emerald-500 font-black uppercase text-xs tracking-widest mt-2 animate-pulse">Conversion Spike Detected</p>
                 </div>}
               </div>
-              <div className="p-8 flex justify-center gap-2">
-                {[0,1,2].map(i => <div key={i} className={`h-1.5 rounded-full transition-all ${currentSlide === i ? 'w-8 bg-indigo-600' : 'w-2 bg-slate-200'}`}></div>)}
+
+              <div className="p-8 flex justify-center gap-2 border-t border-slate-50 bg-white/50">
+                {[0,1,2,3].map(i => <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${currentSlide === i ? 'w-10 bg-indigo-600 shadow-sm' : 'w-2 bg-slate-200'}`}></div>)}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-slate-50 py-32 border-t border-slate-100 text-center lg:text-left">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl lg:text-5xl font-black text-indigo-950 mb-20 text-center tracking-tighter uppercase">{current.featTitle}</h2>
-          <div className="grid lg:grid-cols-3 gap-12 lg:gap-20 text-center">
+      {/* Features Grid */}
+      <section className="bg-slate-50 py-32 border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl lg:text-5xl font-black text-indigo-950 mb-20 tracking-tighter uppercase">{current.featTitle}</h2>
+          <div className="grid lg:grid-cols-3 gap-16">
             <div className="space-y-4">
               <div className="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center text-indigo-600 mx-auto"><ShoppingBag size={32} /></div>
               <h3 className="text-xl font-black text-indigo-950">{current.f1}</h3>
