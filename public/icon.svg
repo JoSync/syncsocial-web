@@ -1,3 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <text y=".9em" font-size="90">∞</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="purple-pop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E879F9;stop-opacity:1" /> <stop offset="100%" style="stop-color:#9333EA;stop-opacity:1" /> </linearGradient>
+  </defs>
+  
+  <path d="M64,64 C46.3,64 32,49.7 32,32 C32,14.3 46.3,0 64,0 C81.7,0 96,14.3 96,32 C96,49.7 81.7,64 64,64 Z M64,64 C81.7,64 96,78.3 96,96 C96,113.7 81.7,128 64,128 C46.3,128 32,113.7 32,96 C32,78.3 46.3,64 64,64 Z"
+        fill="none"
+        stroke="url(#purple-pop)"
+        stroke-width="14"
+        stroke-linecap="round"
+        transform="translate(0, 128) rotate(-90)"/> 
 </svg>
