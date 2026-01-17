@@ -1,12 +1,11 @@
 import './globals.css'
 
 export const metadata = {
-  title: 'SyncSocial.ai | Your life, synchronized',
-  description: 'The first AI-powered calendar bridging content, commerce, and community.',
+  title: 'SyncSocial',
   icons: {
-    icon: 'https://raw.githubusercontent.com/lucide-react/lucide/main/icons/infinity.svg', // Gebruikt tijdelijk het Lucide icoon als favicon
+    icon: '/icon.svg', // Hij zoekt nu in de public map naar icon.svg
   },
-}
+};
 
 export default function RootLayout({ children }) {
   return (
