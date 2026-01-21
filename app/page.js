@@ -46,6 +46,16 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-x-hidden relative">
+    return (
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-x-hidden relative">
+      
+      {/* --- VOEG DEZE REGEL TOE VOOR DE PAARSE GLOED --- */}
+      <div className="fixed inset-0 pointer-events-none z-40 shadow-[inset_0_0_120px_rgba(139,92,246,0.15)]"></div>
+      {/* -------------------------------------------------- */}
+
+      <div className="absolute inset-0 -z-10 opacity-[0.15]" style={{ backgroundImage: BG_SVG, maskImage: 'radial-gradient(circle, black 40%, transparent 90%)' }}></div>
+      <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
+      {/* ... de rest van de code blijft hetzelfde ... */}
       <div className="absolute inset-0 -z-10 opacity-[0.15]" style={{ backgroundImage: BACKGROUND_SVG, maskImage: 'radial-gradient(circle, black 40%, transparent 90%)' }}></div>
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
         <div className="flex items-center gap-2 cursor-pointer">
