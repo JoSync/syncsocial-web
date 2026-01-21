@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Globe, Zap, ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Users, MousePointer2, Sparkles } from 'lucide-react';
 
-// Het NIEUWE Cyber-S Logo (Dubbel S)
+// Het NIEUWE Cyber-S Logo (Dubbel S - Famicom stijl)
 const Logo = ({ className }) => (
   <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* De S-vormige baan */}
     <path 
       d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35"
       stroke="currentColor" 
@@ -55,7 +54,6 @@ export default function LandingPage() {
       {/* NAVIGATIE */}
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
         <div className="flex items-center gap-2 cursor-pointer">
-            {/* HIER IS HET LOGO VERVANGEN */}
             <Logo className="text-indigo-950 w-12 h-12" />
             <span className="text-2xl font-black text-indigo-950 italic">SyncSocial<span className="text-indigo-600">.ai</span></span>
         </div>
@@ -109,7 +107,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* KAARTEN SECTIE - Hier is het logo ook vervangen bij de middelste kaart */}
       <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
             {[{i: <MousePointer2 />, t: c.s1, d: c.s1d}, {i: <Logo className="w-8 h-8" />, t: c.s2, d: c.s2d}, {i: <Zap />, t: c.s3, d: c.s3d}].map((s, i) => (
@@ -124,4 +121,34 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="py-32 relative z-10 text-center"><div className="max-w-7xl mx-auto px-
+      <section className="py-32 relative z-10 text-center">
+        <div className="max-w-7xl mx-auto px-6">
+            <h2 className="text-4xl lg:text-7xl font-black text-indigo-950 tracking-tighter uppercase mb-20 italic underline decoration-indigo-600 underline-offset-8">{c.ft}</h2>
+            <div className="grid lg:grid-cols-3 gap-8">
+                {[{i: <ShoppingBag />, t: c.f1, d: c.f1d}, {i: <BarChart3 />, t: c.f2, d: c.f2d}, {i: <ShieldCheck />, t: c.f3, d: c.f3d}].map((f, i) => (
+                    <div key={i} className="p-12 rounded-[3.5rem] bg-white border border-slate-100 hover:border-indigo-100 transition-all text-left group">
+                        <div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-950 group-hover:text-white transition-all">{f.i}</div>
+                        <h3 className="text-2xl font-black text-indigo-950 mb-4 italic leading-none">{f.t}</h3>
+                        <p className="text-slate-500 font-medium leading-relaxed">{f.d}</p>
+                    </div>
+                ))}
+            </div>
+        </div>
+      </section>
+      
+      <footer className="py-20 text-center border-t border-slate-100 bg-white/60"><p className="text-slate-300 font-bold tracking-[0.3em] uppercase text-[10px] italic">&copy; 2026 SyncSocial.ai</p></footer>
+      <style jsx global>{`
+        @keyframes spin-slow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 15s linear infinite; }
+        @keyframes pulse-slow { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } }
+        .animate-pulse-slow { animation: pulse-slow 8s ease-in-out infinite; }
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+        @keyframes scale-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      `}</style>
+    </div>
+  );
+}
