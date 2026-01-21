@@ -2,13 +2,19 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Globe, Zap, ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Users, MousePointer2, Sparkles } from 'lucide-react';
 
-// Het NIEUWE Cyber-S Logo (Dubbel S)
+// Het Cyber-S Logo met de juiste Roze-Paarse Gradient
 const Logo = ({ className }) => (
   <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    {/* De S-vormige baan */}
+    <defs>
+      {/* HIER PAS JE DE KLEUREN AAN */}
+      <linearGradient id="cyber-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#FF00E4" /> {/* Roze Startkleur */}
+        <stop offset="100%" stopColor="#8B5CF6" /> {/* Paarse Eindkleur */}
+      </linearGradient>
+    </defs>
     <path 
-      d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35"
-      stroke="currentColor" 
+      d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35" 
+      stroke="url(#cyber-gradient)" 
       strokeWidth="14" 
       strokeLinecap="round" 
       strokeLinejoin="round"
