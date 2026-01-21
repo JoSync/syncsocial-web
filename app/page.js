@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShoppingBag, Globe, ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Users, Sparkles } from 'lucide-react';
 import { BACKGROUND_SVG } from './assets';
-import { Logo, texts, CardsSection, FeaturesSection } from './blocks'; // Import uit bestand van stap 1
+import { Logo, texts, CardsSection, FeaturesSection } from './blocks'; 
 
 export default function LandingPage() {
   const [lang, setLang] = useState('EN'); 
@@ -10,7 +10,7 @@ export default function LandingPage() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [viewers, setViewers] = useState(12400);
-  const c = texts[lang]; // De teksten ophalen
+  const c = texts[lang]; 
 
   useEffect(() => {
     const sInt = setInterval(() => setCurrentSlide((p) => (p + 1) % 4), 5000);
@@ -72,10 +72,4 @@ export default function LandingPage() {
       <style jsx global>{`
         @keyframes spin-slow { from { transform: rotate(0); } to { transform: rotate(360deg); } } .animate-spin-slow { animation: spin-slow 15s linear infinite; }
         @keyframes pulse-slow { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } } .animate-pulse-slow { animation: pulse-slow 8s ease-in-out infinite; }
-        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
-        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } } .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
-        @keyframes scale-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } } .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-      `}</style>
-    </div>
-  );
-}
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px);
