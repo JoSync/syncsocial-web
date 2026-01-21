@@ -1,180 +1,107 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { ShoppingBag, Globe, Zap, Infinity, ArrowRight, CheckCircle2, ShieldCheck, BarChart3, Users, MousePointer2, Sparkles } from 'lucide-react';
 
-// HET CORRECTE LOGO: Infinity Sign met Gradient (Roze/Paars)
-const Logo = ({ className }) => (
-  <svg viewBox="0 0 100 50" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" style={{ stopColor: "#FF00E4" }} />
-        <stop offset="100%" style={{ stopColor: "#8B5CF6" }} />
-      </linearGradient>
-    </defs>
-    <path 
-      d="M25 35C16.7 35 10 28.3 10 20C10 11.7 16.7 5 25 5C30.5 5 35.5 8 38.2 12.5L61.8 27.5C64.5 32 69.5 35 75 35C83.3 35 90 28.3 90 20C90 11.7 83.3 5 75 5C69.5 5 64.5 8 61.8 12.5L38.2 27.5C35.5 32 30.5 35 25 35Z" 
-      stroke="url(#logo-gradient)" 
-      strokeWidth="8" 
-      strokeLinecap="round" 
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+export default function LandingPage() {
+  const [lang, setLang] = useState('EN'); 
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [email, setEmail] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [viewers, setViewers] = useState(12400);
 
-export default function Home() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("");
-  const [lang, setLang] = useState("EN");
+  useEffect(() => {
+    const sInt = setInterval(() => setCurrentSlide((p) => (p + 1) % 4), 5000);
+    const vInt = setInterval(() => setViewers(v => v + Math.floor(Math.random() * 50)), 2000);
+    return () => { clearInterval(sInt); clearInterval(vInt); };
+  }, []);
 
-  const translations = {
-    EN: {
-      hero: "SyncSocial",
-      sub: "Sync your content across all platforms with AI power.",
-      placeholder: "Your email address",
-      btn: "Join Waitlist",
-      flowTitle: "How it works",
-      steps: ["Content Creation", "Smart Sync", "Auto Publish"],
-      desc: ["Upload your video or text. AI understands the core.", "AI optimizes for TikTok, Insta, LinkedIn.", "Synced posting at the perfect time."]
-    },
-    NL: {
-      hero: "SyncSocial",
-      sub: "Synchroniseer je content over alle platforms met AI kracht.",
-      placeholder: "Je e-mailadres",
-      btn: "Join Wachtlijst",
-      flowTitle: "Hoe het werkt",
-      steps: ["Content Creatie", "Smart Sync", "Auto Publish"],
-      desc: ["Upload je video of tekst. AI begrijpt de kern.", "AI optimaliseert voor TikTok, Insta, LinkedIn.", "Gesynchroniseerd plaatsen op het beste moment."]
-    },
-    ES: {
-      hero: "SyncSocial",
-      sub: "Sincroniza tu contenido en todas las plataformas con IA.",
-      placeholder: "Tu correo electrónico",
-      btn: "Unirse a la lista",
-      flowTitle: "Cómo funciona",
-      steps: ["Creación de Contenido", "Smart Sync", "Auto Publicar"],
-      desc: ["Sube tu video o texto. La IA entiende la esencia.", "IA optimiza para TikTok, Insta, LinkedIn.", "Publicación sincronizada en el momento ideal."]
-    },
-    ZH: {
-      hero: "SyncSocial",
-      sub: "利用 AI 力量同步您的所有平台内容。",
-      placeholder: "您的电子邮件地址",
-      btn: "加入候补名单",
-      flowTitle: "工作原理",
-      steps: ["内容创作", "智能同步", "自动发布"],
-      desc: ["上传您的视频或文本。AI 深入理解核心内容。", "AI 为 TikTok, Instagram, LinkedIn 优化内容。", "在最佳时间自动同步发布。"]
-    }
-  };
-
-  const t = translations[lang];
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const loading = { EN: "Sending...", NL: "Verzenden...", ES: "Enviando...", ZH: "发送中..." };
-    const success = { EN: "Success! You are on the list.", NL: "Bedankt! Je staat op de lijst.", ES: "¡Gracias!", ZH: "谢谢！" };
-    
-    setStatus(loading[lang]);
-    
-    // Simulatie van de flow die we hadden
-    setTimeout(() => {
-      setStatus(success[lang]);
-      setEmail("");
-    }, 1500);
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) { setIsSubmitted(true); setEmail(""); }
+      else { alert("Error! Please use your Resend test email."); }
+    } catch (err) { console.error(err); }
   };
+
+  const t = {
+    EN: { hero: "Your life, synchronized with your community.", sub: "The first AI-powered calendar bridging content, commerce, and community.", cta: "Claim Access", succ: "Success! You're on the list.", b: "SyncSocial.ai — The future of engagement", s1: "Connect", s1d: "Link socials & store.", s2: "Sync", s2d: "AI builds your schedule.", s3: "Grow", s3d: "Lead fans to revenue.", ft: "Platform Features", f1: "Direct Commerce", f1d: "Sell merch directly.", f2: "Global AI Timing", f2d: "Optimized drops.", f3: "Owned Audience", f3d: "Direct line to fans.", ms: "Verified", mt: "Today", ml: "Live Now" },
+    NL: { hero: "Jouw leven, gesynchroniseerd met je community.", sub: "De eerste AI-gedreven agenda die content, commerce en community verbindt.", cta: "Claim toegang", succ: "Succes! Je staat op de lijst.", b: "SyncSocial.ai — De toekomst van engagement", s1: "Koppel", s1d: "Link je socials & shop.", s2: "Sync", s2d: "AI bouwt je agenda.", s3: "Groei", s3d: "Leid fans naar sales.", ft: "Platform Functies", f1: "Directe Verkoop", f1d: "Verkoop merch vanuit agenda.", f2: "Wereldwijde AI Timing", f2d: "Drop op piekmomenten.", f3: "Eigen Community", f3d: "Directe lijn met fans.", ms: "Geverifieerd", mt: "Vandaag", ml: "Nu Live" },
+    CN: { hero: "同步你的社交生活", sub: "连接内容、商业与社交的AI日历。", cta: "立即加入", succ: "成功！您已加入名单。", b: "SyncSocial.ai — 社交参与的未来", s1: "连接", s1d: "连接社交账号与商店。", s2: "同步", s2d: "AI 自动生成日程。", s3: "增长", s3d: "引导粉丝进入变现环节。", ft: "平台功能", f1: "直接商业化", f1d: "直接通过日历销售。", f2: "全球AI时机", f2d: "针对各时区优化时间。", f3: "私域流量", f3d: "连接忠实粉丝的渠道。", ms: "认证创作者", mt: "今日", ml: "直播中" }
+  };
+  const c = t[lang];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-purple-100 selection:text-purple-900">
-      
-      {/* --- NAVIGATIE --- */}
-      <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto border-b border-slate-100">
-        <div className="flex items-center gap-3">
-          <Logo className="w-16 h-10" />
-          <span className="font-extrabold text-2xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#FF00E4] to-[#8B5CF6]">
-            SyncSocial
-          </span>
-        </div>
-        
-        <div className="relative group">
-          <button className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg flex items-center gap-2 font-bold text-slate-600 hover:bg-slate-100 transition-all">
-            🌐 {lang}
-          </button>
-          <div className="absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-xl hidden group-hover:block shadow-xl z-50 overflow-hidden">
-            {['EN', 'NL', 'ES', 'ZH'].map(l => (
-              <button 
-                key={l} 
-                onClick={() => setLang(l)} 
-                className="w-full px-4 py-3 text-left hover:bg-purple-50 hover:text-purple-600 transition-colors font-bold text-sm"
-              >
-                {l}
-              </button>
-            ))}
-          </div>
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-x-hidden relative">
+      <div className="absolute inset-0 -z-10 opacity-[0.15]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cpath fill-rule='evenodd' d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.89v12.72l11 6.35 11-6.35V17.89l-11-6.35-11 6.35z' fill='%234338ca' /%3E%3C/svg%3E")`, maskImage: 'radial-gradient(circle, black 40%, transparent 90%)' }}></div>
+      <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
+        <div className="flex items-center gap-2 cursor-pointer"><Infinity className="text-indigo-950 w-10 h-10" /><span className="text-2xl font-black text-indigo-950 italic">SyncSocial<span className="text-indigo-600">.ai</span></span></div>
+        <div className="flex bg-white/60 backdrop-blur-xl p-1 rounded-full border border-slate-200 shadow-sm">
+          {['NL', 'EN', 'CN'].map((l) => (<button key={l} onClick={() => setLang(l)} className={`px-4 py-1 rounded-full text-xs font-black transition ${lang === l ? 'bg-indigo-950 text-white shadow-lg' : 'text-slate-400'}`}>{l}</button>))}
         </div>
       </nav>
-
-      {/* --- HERO SECTIE --- */}
-      <section className="py-24 px-6 text-center max-w-4xl mx-auto">
-        <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tight text-slate-900">
-          Sync<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF00E4] to-[#8B5CF6]">Social</span>
-        </h1>
-        <p className="text-xl md:text-2xl text-slate-500 mb-12 leading-relaxed max-w-2xl mx-auto">
-          {t.sub}
-        </p>
-        
-        {/* EMAIL INPUT (Met de Gradients die we hadden) */}
-        <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
-          <input 
-            type="email" 
-            placeholder={t.placeholder}
-            className="flex-1 bg-slate-50 border-2 border-slate-200 px-6 py-4 rounded-2xl outline-none focus:border-[#FF00E4] focus:bg-white transition-all text-lg font-medium text-slate-800" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required 
-          />
-          <button type="submit" className="bg-gradient-to-r from-[#FF00E4] to-[#8B5CF6] text-white px-8 py-4 rounded-2xl font-bold text-lg shadow-lg shadow-purple-200 hover:brightness-110 hover:shadow-purple-300 hover:scale-105 transition-all">
-            {t.btn}
-          </button>
-        </form>
-        {status && <p className="mt-6 text-[#FF00E4] font-bold text-lg animate-pulse">{status}</p>}
-      </section>
-
-      {/* --- FLOW SECTIE --- */}
-      
-      <section className="py-24 bg-slate-50 border-y border-slate-200">
-        <div className="max-w-6xl mx-auto px-6">
-          <h2 className="text-3xl font-black mb-20 text-center text-slate-900 uppercase tracking-widest">{t.flowTitle}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            
-            {/* Stap 1 */}
-            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-tr from-[#FF00E4] to-[#8B5CF6] text-white rounded-2xl flex items-center justify-center font-black text-2xl mb-6 shadow-lg shadow-purple-100">1</div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900">{t.steps[0]}</h3>
-              <p className="text-slate-500 leading-relaxed font-medium">{t.desc[0]}</p>
+      <section className="max-w-7xl mx-auto px-6 pt-12 pb-32 text-center flex flex-col items-center">
+        <div className="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-[10px] font-black mb-8 uppercase tracking-widest"><Sparkles size={12} /> {c.b}</div>
+        <h1 className="text-5xl lg:text-8xl font-black tracking-tighter text-indigo-950 mb-8 leading-[0.95] max-w-4xl">{c.hero}</h1>
+        <p className="text-xl text-slate-500 max-w-2xl mb-12 font-medium italic">{c.sub}</p>
+        <div className="w-full max-w-xl mb-32">
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row shadow-2xl rounded-full overflow-hidden border border-indigo-100 bg-white">
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="flex-[2] h-16 px-10 outline-none text-lg bg-white border-b sm:border-b-0 sm:border-r border-slate-100" />
+              <button type="submit" className="flex-1 h-16 bg-indigo-950 text-white px-8 font-black text-lg hover:bg-indigo-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button>
+            </form>
+          ) : (
+            <div className="bg-emerald-50 border-2 border-emerald-100 h-16 px-10 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg">
+              <CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black text-lg italic">{c.succ}</p>
             </div>
-
-            {/* Stap 2 */}
-            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-tr from-[#FF00E4] to-[#8B5CF6] text-white rounded-2xl flex items-center justify-center font-black text-2xl mb-6 shadow-lg shadow-purple-100">2</div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900">{t.steps[1]}</h3>
-              <p className="text-slate-500 leading-relaxed font-medium">{t.desc[1]}</p>
+          )}
+          <div className="flex items-center justify-center gap-3 mt-8">
+             <div className="flex -space-x-3">{[1,2,3,4].map(i => <div key={i} className="w-9 h-9 rounded-full border-2 border-indigo-50 bg-white shadow-sm flex items-center justify-center text-indigo-300"><Users size={14} /></div>)}</div>
+             <p className="text-[10px] font-black uppercase text-slate-500 italic">Join 500+ creators in sync</p>
+          </div>
+        </div>
+        <div className="relative w-full max-w-3xl">
+          <div className="absolute -inset-20 bg-gradient-to-tr from-indigo-500 via-purple-400 to-emerald-400 opacity-30 blur-[120px] rounded-full animate-pulse-slow"></div>
+          <div className="relative bg-indigo-950 rounded-[3.5rem] p-3 shadow-2xl border-[12px] border-indigo-900 overflow-hidden ring-1 ring-white/10">
+            <div className="bg-white rounded-[2.5rem] overflow-hidden h-[600px] flex flex-col relative shadow-inner text-left">
+              <div className="bg-white border-b border-slate-50 p-6 flex justify-between items-center sticky top-0 z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-indigo-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white shadow-lg">MS</div>
+                  <div className="leading-tight"><p className="font-black text-indigo-950 text-sm italic">Maxime & Sophie</p><p className="text-[10px] text-emerald-500 font-black uppercase flex items-center gap-1 mt-1"><ShieldCheck size={10} /> {c.ms}</p></div>
+                </div>
+                <Globe size={20} className="text-indigo-600 animate-spin-slow" />
+              </div>
+              <div className="flex-1 relative p-8">
+                {currentSlide === 0 && <div className="animate-fade-in"><p className="text-[10px] font-black text-slate-400 uppercase mb-6">{c.mt}</p><div className="p-6 bg-indigo-50 border border-indigo-100 rounded-3xl shadow-sm flex items-center gap-4"><div className="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center text-white shadow-lg"><ShoppingBag size={24} /></div><div><p className="font-black text-indigo-950 text-lg leading-none italic">Merch Drop</p><p className="text-[10px] font-bold text-indigo-400 mt-1 uppercase">14:00 GMT</p></div></div></div>}
+                {currentSlide === 1 && <div className="animate-fade-in"><p className="text-[10px] font-black text-slate-400 uppercase mb-6 italic">Weekly Overview</p><div className="space-y-3">{[1,2,3].map(i => <div key={i} className="h-14 bg-slate-50 rounded-2xl border flex items-center px-4"><div className="w-8 h-8 rounded-full bg-white border mr-4 shadow-sm"></div><div className="h-2 w-24 bg-slate-200 rounded-full"></div></div>)}</div></div>}
+                {currentSlide === 2 && <div className="animate-fade-in flex flex-col items-center justify-center h-full text-center"><div className="relative mb-6"><div className="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-black px-3 py-1 rounded-full animate-pulse">{c.ml}</div><div className="w-32 h-32 bg-indigo-950 rounded-[2.5rem] flex items-center justify-center border-4 border-white shadow-xl"><Globe size={48} className="text-indigo-400" /></div></div><div className="flex items-center gap-2 bg-indigo-50 px-5 py-2 rounded-full shadow-sm"><Users size={16} /><span className="font-black text-indigo-950">{viewers.toLocaleString()}</span></div></div>}
+                {currentSlide === 3 && <div className="animate-fade-in flex flex-col items-center justify-center h-full"><BarChart3 size={64} className="text-emerald-500 mb-4 animate-bounce-slow" /><p className="text-2xl font-black text-indigo-950 italic">AI Analytics</p></div>}
+              </div>
+              <div className="p-8 flex justify-center gap-2">
+                {[0,1,2,3].map(i => <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${currentSlide === i ? 'w-10 bg-indigo-600' : 'w-2 bg-slate-200'}`}></div>)}
+              </div>
             </div>
-
-            {/* Stap 3 */}
-            <div className="bg-white p-10 rounded-[2.5rem] shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
-              <div className="w-14 h-14 bg-gradient-to-tr from-[#FF00E4] to-[#8B5CF6] text-white rounded-2xl flex items-center justify-center font-black text-2xl mb-6 shadow-lg shadow-purple-100">3</div>
-              <h3 className="text-2xl font-bold mb-4 text-slate-900">{t.steps[2]}</h3>
-              <p className="text-slate-500 leading-relaxed font-medium">{t.desc[2]}</p>
-            </div>
-
           </div>
         </div>
       </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="py-20 text-center">
-        <p className="text-slate-400 font-bold uppercase tracking-[0.2em] text-xs">
-          © 2026 SyncSocial AI
-        </p>
-      </footer>
-
+      <section className="py-24 relative z-10"><div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">{[{i: <MousePointer2 />, t: c.s1, d: c.s1d}, {i: <Infinity />, t: c.s2, d: c.s2d}, {i: <Zap />, t: c.s3, d: c.s3d}].map((s, i) => (<div key={i} className="bg-white/60 backdrop-blur-xl p-10 rounded-[3rem] border border-white shadow-sm text-center space-y-4 hover:shadow-2xl transition-all group"><div className="w-16 h-16 bg-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto transition-transform group-hover:rotate-12 shadow-lg">{s.i}</div><h3 className="text-xl font-black text-indigo-950 italic tracking-tighter uppercase">{s.t}</h3><p className="text-slate-500 font-medium text-sm">{s.d}</p></div>))}</div></section>
+      <section className="py-32 relative z-10 text-center"><div className="max-w-7xl mx-auto px-6"><h2 className="text-4xl lg:text-7xl font-black text-indigo-950 tracking-tighter uppercase mb-20 italic underline decoration-indigo-600 underline-offset-8">{c.ft}</h2><div className="grid lg:grid-cols-3 gap-8">{[{i: <ShoppingBag />, t: c.f1, d: c.f1d}, {i: <BarChart3 />, t: c.f2, d: c.f2d}, {i: <ShieldCheck />, t: c.f3, d: c.f3d}].map((f, i) => (<div key={i} className="p-12 rounded-[3.5rem] bg-white border border-slate-100 hover:border-indigo-100 transition-all text-left group"><div className="w-14 h-14 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-950 group-hover:text-white transition-all">{f.i}</div><h3 className="text-2xl font-black text-indigo-950 mb-4 italic leading-none">{f.t}</h3><p className="text-slate-500 font-medium leading-relaxed">{f.d}</p></div>))}</div></div></section>
+      <footer className="py-20 text-center border-t border-slate-100 bg-white/60"><p className="text-slate-300 font-bold tracking-[0.3em] uppercase text-[10px] italic">&copy; 2026 SyncSocial.ai</p></footer>
+      <style jsx global>{`
+        @keyframes spin-slow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 15s linear infinite; }
+        @keyframes pulse-slow { 0%, 100% { opacity: 0.2; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.1); } }
+        .animate-pulse-slow { animation: pulse-slow 8s ease-in-out infinite; }
+        @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
+        @keyframes scale-in { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .animate-scale-in { animation: scale-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      `}</style>
     </div>
   );
 }
