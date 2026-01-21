@@ -1,17 +1,11 @@
-
 "use client";
 import React, { useState } from 'react';
 
-// Het Cyber-S Logo - Intern geplaatst voor 100% stabiliteit
+// Stabiele Logo Component
 const Logo = ({ className }) => (
   <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="cyber-g" x1="0%" y1="100%" x2="100%" y2="0%">
-        <stop offset="0%" style={{ stopColor: "#FF00E4" }} />
-        <stop offset="100%" style={{ stopColor: "#8B5CF6" }} />
-      </linearGradient>
-    </defs>
-    <path d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35" stroke="url(#cyber-g)" strokeWidth="18" strokeLinecap="round" />
+    <path d="M64 128C99.3462 128 128 99.3462 128 64C128 28.6538 99.3462 0 64 0C28.6538 0 0 28.6538 0 64C0 99.3462 28.6538 128 64 128Z" fill="#2563EB"/>
+    <path d="M40 64C40 50.7452 50.7452 40 64 40C77.2548 40 88 50.7452 88 64C88 77.2548 77.2548 88 64 88C50.7452 88 40 77.2548 40 64Z" fill="white"/>
   </svg>
 );
 
@@ -20,112 +14,105 @@ export default function Home() {
   const [status, setStatus] = useState("");
   const [lang, setLang] = useState("EN");
 
-  // De volledige vertalingen inclusief Chinees (ZH) en Spaans (ES)
-  const t = {
+  const translations = {
     EN: { hero: "SyncSocial", sub: "Sync your content across all platforms with AI power.", btn: "Join Waitlist", flow: "HOW IT WORKS", s: ["Content Creation", "Smart Sync", "Auto Publish"], d: ["Upload video or text. AI understands the core.", "AI optimizes for all platforms.", "Synced posting at the perfect time."] },
     NL: { hero: "SyncSocial", sub: "Synchroniseer je content over alle platforms met AI kracht.", btn: "Join Wachtlijst", flow: "HOE HET WERKT", s: ["Content Creatie", "Smart Sync", "Auto Publish"], d: ["Upload video of tekst. AI begrijpt de kern.", "AI optimaliseert voor elk platform.", "Gesynchroniseerd plaatsen op het juiste moment."] },
     ES: { hero: "SyncSocial", sub: "Sincroniza tu contenido en todas las plataformas con IA.", btn: "Unirse", flow: "CÓMO FUNCIONA", s: ["Creación", "Smart Sync", "Auto Publicar"], d: ["Sube video o texto. La IA entiende la esencia.", "IA optimiza para redes sociales.", "Publicación sincronizada ideal."] },
     ZH: { hero: "SyncSocial", sub: "利用 AI 力量同步您的所有平台内容。", btn: "加入候补名单", flow: "工作原理", s: ["内容创作", "智能同步", "自动发布"], d: ["上传视频或文本。AI 理解核心。", "AI 为所有平台优化。", "在最佳时间自动同步发布。"] }
-  }[lang];
+  };
+
+  const t = translations[lang];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const loadingMsg = { EN: "Sending...", NL: "Verzenden...", ES: "Enviando...", ZH: "发送中..." };
-    const successMsg = { EN: "Success!", NL: "Bedankt!", ES: "¡Gracias!", ZH: "谢谢！" };
-    setStatus(loadingMsg[lang]);
-    setTimeout(() => setStatus(successMsg[lang]), 1500);
+    const loading = { EN: "Sending...", NL: "Verzenden...", ES: "Enviando...", ZH: "发送中..." };
+    const success = { EN: "Success!", NL: "Bedankt!", ES: "¡Gracias!", ZH: "谢谢！" };
+    setStatus(loading[lang]);
+    setTimeout(() => {
+      setStatus(success[lang]);
+      setEmail("");
+    }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white font-sans selection:bg-purple-500/30 overflow-x-hidden">
+    <div className="min-h-screen bg-white text-slate-900 font-sans">
       
-      {/* --- ACHTERGROND ELEMENTEN --- */}
-      <div className="fixed inset-0 z-0 opacity-20 pointer-events-none" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49'%3E%3Cpath d='M14 0L28 8V24.5L14 32.5L0 24.5V8L14 0Z' fill='none' stroke='%238B5CF6' stroke-width='0.5'/%3E%3C/svg%3E")`, backgroundSize: '56px 98px' }}>
-      </div>
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-purple-600/20 rounded-full blur-[130px] z-0 pointer-events-none"></div>
+      {/* NAVIGATIE */}
+      <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto border-b border-slate-100">
+        <div className="flex items-center gap-2">
+          <Logo className="w-8 h-8" />
+          <span className="font-bold text-xl tracking-tight">SyncSocial</span>
+        </div>
+        <div className="relative group">
+          <button className="bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg flex items-center gap-2 font-medium">
+            🌐 {lang}
+          </button>
+          <div className="absolute right-0 mt-2 w-32 bg-white border border-slate-200 rounded-lg hidden group-hover:block shadow-xl z-50">
+            {['EN', 'NL', 'ES', 'ZH'].map(l => (
+              <button key={l} onClick={() => setLang(l)} className="w-full px-4 py-3 text-left hover:bg-slate-50 transition-colors font-semibold">{l}</button>
+            ))}
+          </div>
+        </div>
+      </nav>
 
-      {/* --- CONTENT LAYER --- */}
-      <div className="relative z-10 flex flex-col items-center w-full">
+      {/* HERO SECTIE */}
+      <section className="py-24 px-6 text-center max-w-4xl mx-auto">
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-slate-900">
+          {t.hero}
+        </h1>
+        <p className="text-xl text-slate-600 mb-10 leading-relaxed">
+          {t.sub}
+        </p>
         
-        {/* NAVIGATIE */}
-        <nav className="w-full max-w-7xl flex justify-between items-center p-6 sm:p-8">
-          <Logo className="w-10 h-10 drop-shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
-          <div className="relative group">
-            <button className="bg-zinc-900/90 border border-white/10 px-5 py-2 rounded-xl backdrop-blur-md flex items-center gap-2 hover:border-purple-500/50 transition-all">
-              <span className="text-sm font-bold uppercase tracking-widest text-zinc-300">🌐 {lang}</span>
-            </button>
-            <div className="absolute right-0 mt-2 w-36 bg-zinc-900 border border-white/10 rounded-xl hidden group-hover:block overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.8)] z-50">
-              {['EN', 'NL', 'ES', 'ZH'].map(l => (
-                <button key={l} onClick={() => setLang(l)} className="w-full px-4 py-3 text-left hover:bg-purple-600 transition-colors font-bold text-sm uppercase">{l}</button>
-              ))}
+        <form onSubmit={handleSubmit} className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+          <input 
+            type="email" 
+            placeholder="Email" 
+            className="flex-1 bg-slate-50 border border-slate-200 px-6 py-4 rounded-xl outline-none focus:border-blue-500 transition-all" 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required 
+          />
+          <button type="submit" className="bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200">
+            {t.btn}
+          </button>
+        </form>
+        {status && <p className="mt-4 text-blue-600 font-bold">{status}</p>}
+      </section>
+
+      {/* FLOW SECTIE (HOW IT WORKS) */}
+      
+      <section className="py-24 bg-slate-50 border-y border-slate-100">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold mb-16 text-center text-slate-900 uppercase tracking-widest">{t.flow}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+            {/* Stap 1 */}
+            <div>
+              <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-6 text-xl">1</div>
+              <h3 className="text-xl font-bold mb-4">{t.s[0]}</h3>
+              <p className="text-slate-500 leading-relaxed">{t.d[0]}</p>
+            </div>
+            {/* Stap 2 */}
+            <div>
+              <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-6 text-xl">2</div>
+              <h3 className="text-xl font-bold mb-4">{t.s[1]}</h3>
+              <p className="text-slate-500 leading-relaxed">{t.d[1]}</p>
+            </div>
+            {/* Stap 3 */}
+            <div>
+              <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mx-auto mb-6 text-xl">3</div>
+              <h3 className="text-xl font-bold mb-4">{t.s[2]}</h3>
+              <p className="text-slate-500 leading-relaxed">{t.d[2]}</p>
             </div>
           </div>
-        </nav>
+        </div>
+      </section>
 
-        {/* HERO SECTIE */}
-        <section className="w-full max-w-5xl px-6 text-center pt-16 pb-32">
-          <h1 className="text-6xl md:text-9xl font-black mb-8 tracking-tighter italic uppercase leading-[0.9]">
-            Sync<span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF00E4] to-[#8B5CF6] drop-shadow-[0_0_25px_rgba(255,0,228,0.3)]">Social</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-zinc-400 mb-14 max-w-2xl mx-auto leading-relaxed">{t.sub}</p>
-          
-          {/* EMAIL FORMULIER */}
-          <form onSubmit={handleSubmit} className="max-w-md mx-auto p-2 bg-zinc-900/90 rounded-[2rem] border border-white/10 shadow-2xl backdrop-blur-2xl flex flex-col sm:flex-row gap-3">
-            <input 
-              type="email" 
-              placeholder="Email" 
-              className="flex-1 bg-transparent px-6 py-4 outline-none text-white font-medium placeholder:text-zinc-600" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <button type="submit" className="bg-gradient-to-r from-[#FF00E4] to-[#8B5CF6] text-white px-10 py-4 rounded-2xl font-black uppercase tracking-widest shadow-[0_0_30px_rgba(139,92,246,0.4)] hover:brightness-110 active:scale-95 transition-all">
-              {t.btn}
-            </button>
-          </form>
-          {status && <p className="mt-6 text-[#FF00E4] font-bold tracking-widest animate-pulse">{status}</p>}
-        </section>
+      {/* FOOTER */}
+      <footer className="py-16 text-center text-slate-400 text-sm font-medium tracking-wide">
+        © 2026 SYNCSOCIAL AI - ALL RIGHTS RESERVED
+      </footer>
 
-        {/* FLOW SECTIE */}
-        
-        <section id="flow" className="w-full py-32 bg-[#0A0A0A] border-y border-white/5 relative flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-6 w-full">
-            <h2 className="text-4xl md:text-5xl font-black mb-24 text-center tracking-[0.3em] uppercase italic text-white">
-              {t.flow}
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Stap 1 */}
-              <div className="bg-zinc-900/40 p-12 rounded-[3rem] border border-white/5 relative group hover:border-purple-500/30 transition-all duration-500">
-                <div className="absolute -top-6 left-10 px-5 py-2 bg-[#FF00E4] rounded-2xl text-[12px] font-black italic shadow-[0_10px_20px_rgba(255,0,228,0.3)]">STEP 01</div>
-                <h3 className="text-2xl font-bold mb-5 mt-4 text-white uppercase tracking-tight">{t.s[0]}</h3>
-                <p className="text-zinc-500 leading-relaxed text-lg">{t.d[0]}</p>
-              </div>
-              {/* Stap 2 */}
-              <div className="bg-zinc-900/40 p-12 rounded-[3rem] border border-white/5 relative group hover:border-purple-500/30 transition-all duration-500 shadow-[0_0_50px_rgba(139,92,246,0.1)]">
-                <div className="absolute -top-6 left-10 px-5 py-2 bg-purple-600 rounded-2xl text-[12px] font-black italic shadow-[0_10px_20px_rgba(139,92,246,0.3)]">STEP 02</div>
-                <h3 className="text-2xl font-bold mb-5 mt-4 text-white uppercase tracking-tight">{t.s[1]}</h3>
-                <p className="text-zinc-500 leading-relaxed text-lg">{t.d[1]}</p>
-              </div>
-              {/* Stap 3 */}
-              <div className="bg-zinc-900/40 p-12 rounded-[3rem] border border-white/5 relative group hover:border-purple-500/30 transition-all duration-500">
-                <div className="absolute -top-6 left-10 px-5 py-2 bg-zinc-700 rounded-2xl text-[12px] font-black italic shadow-lg">STEP 03</div>
-                <h3 className="text-2xl font-bold mb-5 mt-4 text-white uppercase tracking-tight">{t.s[2]}</h3>
-                <p className="text-zinc-500 leading-relaxed text-lg">{t.d[2]}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* FOOTER */}
-        <footer className="w-full py-24 text-center">
-          <div className="w-20 h-[1px] bg-zinc-800 mx-auto mb-10"></div>
-          <p className="text-zinc-600 text-[10px] tracking-[1em] uppercase font-bold">
-            SyncSocial // Protocol 2026 // Global Node
-          </p>
-        </footer>
-
-      </div>
     </div>
   );
 }
