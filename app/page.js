@@ -50,13 +50,13 @@ export default function LandingPage() {
         <div className="inline-flex items-center gap-2 bg-violet-50 text-violet-700 px-4 py-2 rounded-full text-[10px] font-black mb-8 uppercase tracking-widest"><Sparkles size={12} /> {c.b}</div>
         <h1 className="text-5xl lg:text-8xl font-black tracking-tighter text-violet-950 mb-8 leading-[0.95] max-w-4xl">{c.hero}</h1>
         <p className="text-lg lg:text-xl text-slate-500 max-w-5xl mb-12 font-medium italic">{c.sub}</p>
-        <div className="w-full max-w-md mb-24">
+        <div className="w-full max-w-xl mb-24">
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col shadow-2xl rounded-[2.5rem] overflow-hidden border border-violet-100 bg-white">
-              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="h-20 px-10 outline-none text-lg bg-white border-b border-slate-50 text-center" />
-              <button type="submit" className="h-20 bg-violet-950 text-white px-8 font-black text-xl hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={24} /></button>
+            <form onSubmit={handleSubmit} className="flex flex-col shadow-2xl rounded-[3rem] overflow-hidden border border-violet-100 bg-white">
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="h-16 px-10 outline-none text-lg bg-white border-b border-slate-50" />
+              <button type="submit" className="h-16 bg-violet-950 text-white px-8 font-black text-lg hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button>
             </form>
-          ) : (<div className="bg-emerald-50 border-2 border-emerald-100 h-20 px-10 rounded-[2.5rem] flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg"><CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black text-lg italic">{c.succ}</p></div>)}
+          ) : (<div className="bg-emerald-50 border-2 border-emerald-100 h-16 px-10 rounded-[3rem] flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg"><CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black text-lg italic">{c.succ}</p></div>)}
         </div>
         <IntegrationsSection c={c} />
         <div className="relative w-full max-w-3xl mt-24">
