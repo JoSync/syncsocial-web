@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Zap, ShieldCheck, BarChart3, MousePointer2, Share2 } from 'lucide-react';
+import { ShoppingBag, Zap, ShieldCheck, BarChart3, MousePointer2 } from 'lucide-react';
 
 export const Logo = ({ className }) => (
   <svg viewBox="0 0 128 128" className={className} fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,14 +10,15 @@ export const Logo = ({ className }) => (
 
 export const texts = {
   EN: { hero: "Your life in sync.", sub: "The first AI-powered calendar bridging content, commerce, and community.", cta: "Claim Access", succ: "Success! You're on the list.", b: "SyncSocial.ai — The future of engagement", s1: "Connect", s1d: "Link socials & store.", s2: "Sync", s2d: "AI builds your schedule.", s3: "Grow", s3d: "Lead fans to revenue.", ft: "Platform Features", f1: "Direct Commerce", f1d: "Sell merch directly.", f2: "Global AI Timing", f2d: "Optimized drops.", f3: "Owned Audience", f3d: "Direct line to fans.", ms: "Verified", mt: "Today", ml: "Live Now", int: "Works with your stack" },
-  NL: { hero: "Jouw leven in sync.", sub: "De eerste AI-gedreven agenda die content, commerce en community verbindt.", cta: "Claim toegang", succ: "Succes! Je staat op de lijst.", b: "SyncSocial.ai — De toekomst van engagement", s1: "Koppel", s1d: "Link je socials & shop.", s2: "Sync", s2d: "AI bouwt je agenda.", s3: "Groei", s3d: "Leid fans naar sales.", ft: "Platform Functies", f1: "Directe Verkoop", f1d: "Verkoop merch vanuit agenda.", f2: "Wereldwijde AI Timing", f2d: "Drop op piekmomenten.", f3: "Eigen Community", f3d: "Directe lijn met fans.", ms: "Geverifieerd", mt: "Vandaag", ml: "Nu Live", int: "Koppelt met je stack" }
+  NL: { hero: "Jouw leven in sync.", sub: "De eerste AI-gedreven agenda die content, commerce en community verbindt.", cta: "Claim toegang", succ: "Succes! Je staat op de lijst.", b: "SyncSocial.ai — De toekomst van engagement", s1: "Koppel", s1d: "Link je socials & shop.", s2: "Sync", s2d: "AI bouwt je agenda.", s3: "Groei", s3d: "Leid fans naar sales.", ft: "Platform Functies", f1: "Directe Verkoop", f1d: "Verkoop merch vanuit agenda.", f2: "Wereldwijde AI Timing", f2d: "Drop op piekmomenten.", f3: "Eigen Community", f3d: "Directe lijn met fans.", ms: "Geverifieerd", mt: "Vandaag", ml: "Nu Live", int: "Koppelt met je stack" },
+  CN: { hero: "同步你的生活", sub: "连接内容、商业与社交的AI日历。", cta: "立即加入", succ: "成功！您已加入名单。", b: "SyncSocial.ai — 社交参与的未来", s1: "连接", s1d: "连接社交账号与商店。", s2: "同步", s2d: "AI 自动生成日程。", s3: "增长", s3d: "引导粉丝进入变现环节。", ft: "平台功能", f1: "直接商业化", f1d: "直接通过日历销售。", f2: "全球AI时机", f2d: "针对各时区优化时间。", f3: "私域流量", f3d: "连接忠实粉丝的渠道。", ms: "认证创作者", mt: "今日", ml: "直播中", int: "支持全球主流平台" }
 };
 
 export const IntegrationsSection = ({ c }) => (
-  <div className="py-12 border-y border-slate-50 bg-slate-50/30">
-    <p className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-8">{c.int}</p>
-    <div className="flex flex-wrap justify-center gap-8 lg:gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-      {['Shopify', 'TikTok', 'Instagram', 'Pietra', 'Stripe'].map((p) => (
+  <div className="py-12 relative z-10">
+    <p className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-10">{c.int}</p>
+    <div className="flex flex-wrap justify-center gap-8 lg:gap-14 opacity-30 grayscale hover:grayscale-0 transition-all duration-1000">
+      {['Shopify', 'TikTok', 'Douyin', 'Instagram', 'Xiaohongshu', 'Pietra', 'Stripe'].map((p) => (
         <span key={p} className="font-black text-xl lg:text-2xl text-slate-900 tracking-tighter italic">{p}</span>
       ))}
     </div>
