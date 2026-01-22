@@ -31,7 +31,6 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-violet-100 overflow-x-hidden relative">
       <div className="fixed inset-0 pointer-events-none z-40 shadow-[inset_0_0_150px_rgba(139,92,246,0.25)]"></div>
       <div className="absolute inset-0 -z-10 opacity-[0.15]" style={{ backgroundImage: BACKGROUND_SVG, maskImage: 'radial-gradient(circle, black 40%, transparent 90%)' }}></div>
-      
       <nav className="flex justify-between items-center p-8 max-w-7xl mx-auto relative z-50">
         <div className="flex items-center gap-2 cursor-pointer"><Logo className="w-12 h-12" /><span className="text-2xl font-black text-violet-950 italic">SyncSocial<span className="text-violet-600">.ai</span></span></div>
         <div className="relative">
@@ -47,14 +46,13 @@ export default function LandingPage() {
           )}
         </div>
       </nav>
-
       <section className="max-w-7xl mx-auto px-6 pt-12 pb-32 text-center flex flex-col items-center relative z-10">
         <div className="inline-flex items-center gap-2 bg-violet-50 text-violet-700 px-4 py-2 rounded-full text-[10px] font-black mb-8 uppercase tracking-widest"><Sparkles size={12} /> {c.b}</div>
         <h1 className="text-5xl lg:text-8xl font-black tracking-tighter text-violet-950 mb-8 leading-[0.95] max-w-4xl">{c.hero}</h1>
-        <p className="text-xl text-slate-500 max-w-2xl mb-12 font-medium italic">{c.sub}</p>
+        <p className="text-lg lg:text-xl text-slate-500 max-w-5xl mb-12 font-medium italic">{c.sub}</p>
         <div className="w-full max-w-xl mb-24">
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:row shadow-2xl rounded-full overflow-hidden border border-violet-100 bg-white"><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="flex-[2] h-16 px-10 outline-none text-lg bg-white" /><button type="submit" className="flex-1 h-16 bg-violet-950 text-white px-8 font-black text-lg hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button></form>
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row shadow-2xl rounded-full overflow-hidden border border-violet-100 bg-white"><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="flex-[2] h-16 px-10 outline-none text-lg bg-white" /><button type="submit" className="flex-1 h-16 bg-violet-950 text-white px-8 font-black text-lg hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button></form>
           ) : (<div className="bg-emerald-50 border-2 border-emerald-100 h-16 px-10 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg"><CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black text-lg italic">{c.succ}</p></div>)}
         </div>
         <IntegrationsSection c={c} />
