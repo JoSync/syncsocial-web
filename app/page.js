@@ -52,7 +52,10 @@ export default function LandingPage() {
         <p className="text-lg lg:text-xl text-slate-500 max-w-5xl mb-12 font-medium italic">{c.sub}</p>
         <div className="w-full max-w-xl mb-24">
           {!isSubmitted ? (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row shadow-2xl rounded-full overflow-hidden border border-violet-100 bg-white"><input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" className="flex-[2] h-16 px-10 outline-none text-lg bg-white" /><button type="submit" className="flex-1 h-16 bg-violet-950 text-white px-8 font-black text-lg hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button></form>
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row shadow-2xl rounded-full overflow-hidden border border-violet-100 bg-white">
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email address" className="flex-[2] h-16 px-10 outline-none text-lg bg-white border-b sm:border-b-0 sm:border-r border-slate-100" />
+              <button type="submit" className="flex-1 h-16 bg-violet-950 text-white px-8 font-black text-lg hover:bg-violet-600 transition-all flex items-center justify-center gap-2 uppercase">{c.cta} <ArrowRight size={20} /></button>
+            </form>
           ) : (<div className="bg-emerald-50 border-2 border-emerald-100 h-16 px-10 rounded-full flex items-center justify-center gap-4 animate-scale-in w-full shadow-lg"><CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black text-lg italic">{c.succ}</p></div>)}
         </div>
         <IntegrationsSection c={c} />
