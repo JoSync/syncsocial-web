@@ -1,19 +1,35 @@
 import React from 'react';
-import { ShoppingBag, Zap, ShieldCheck, BarChart3, MousePointer2, Heart, TrendingUp } from 'lucide-react';
+import { ShoppingBag, Zap, ShieldCheck, BarChart3, MousePointer2, Heart, TrendingUp, Search, Clock, MessageSquare, Target } from 'lucide-react';
 
 export const Logo = ({ className }) => (
   <svg viewBox="0 0 128 128" className={className} fill="none"><defs><linearGradient id="cg" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#FF00E4" /><stop offset="100%" stopColor="#8B5CF6" /></linearGradient></defs><path d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35" stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round"/></svg>
 );
 
 export const texts = {
-  EN: { hero: "Your life in sync", sub: "The first AI-powered calendar bridging content, commerce, and community", cta: "Claim Access", succ: "Success!", b: "SyncSocial.ai — The future", ft: "Features", f1: "Commerce", f1d: "Sell merch directly.", f2: "AI Timing", f2d: "Optimized drops.", f3: "Audience", f3d: "Direct line to fans.", ms: "Verified", mt: "Today", ml: "Live", int: "Works with your stack", ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'Pinterest', 'Snapchat', 'Pietra', 'Stripe', 'Amazon'],
-    slides: [{t: "Merch Drop", d: "14:00 GMT", i: <ShoppingBag size={24}/>, v: "Syncing Shopify..."}, {t: "Fan Growth", d: "Real-time", i: <Heart size={24}/>, v: "+1,240 new fans"}, {t: "AI Revenue", d: "Optimization", i: <TrendingUp size={24}/>, v: "+22% Projected Sales"}] },
-  NL: { hero: "Jouw leven in sync", sub: "De eerste AI-gedreven agenda die content, commerce en community verbindt", cta: "Claim toegang", succ: "Succes!", b: "SyncSocial.ai — De toekomst", ft: "Functies", f1: "Verkoop", f1d: "Verkoop vanuit agenda.", f2: "AI Timing", f2d: "Drop op piekmomenten.", f3: "Community", f3d: "Lijn met fans.", ms: "Geverifieerd", mt: "Vandaag", ml: "Nu Live", int: "Koppelt met je stack", ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'Pinterest', 'Snapchat', 'Mollie', 'Stripe'],
-    slides: [{t: "Merch Drop", d: "14:00 GMT", i: <ShoppingBag size={24}/>, v: "Sync met Shopify..."}, {t: "Fan Groei", d: "Live", i: <Heart size={24}/>, v: "+1.240 nieuwe fans"}, {t: "AI Omzet", d: "Optimalisatie", i: <TrendingUp size={24}/>, v: "+22% Verwachte Sales"}] },
-  ES: { hero: "Tu vida en sincronía", sub: "El primer calendario con IA que une contenido, comercio y comunidad", cta: "Solicitar Acceso", succ: "¡Éxito!", b: "SyncSocial.ai — El futuro", ft: "Funciones", f1: "Comercio", f1d: "Vende directamente.", f2: "Timing IA", f2d: "Drops optimizados.", f3: "Audiencia", f3d: "Línea directa con fans.", ms: "Verificado", mt: "Hoy", ml: "En Vivo", int: "Funciona con tus apps", ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'Pinterest', 'Snapchat', 'Mercado Libre', 'WhatsApp', 'Stripe'],
-    slides: [{t: "Lanzamiento", d: "14:00 GMT", i: <ShoppingBag size={24}/>, v: "Sync con Shopify..."}, {t: "Fans", d: "En Vivo", i: <Heart size={24}/>, v: "+1.240 nuevos fans"}, {t: "IA Ventas", d: "Optimización", i: <TrendingUp size={24}/>, v: "+22% Ventas Proyectadas"}] },
-  CN: { hero: "同步你的生活", sub: "连接内容、商业与社交的AI日历", cta: "立即加入", succ: "成功！", b: "SyncSocial.ai — 未来", ft: "平台功能", f1: "商业化", f1d: "直接通过日历销售。", f2: "AI 时机", f2d: "全球时区优化。", f3: "私域流量", f3d: "连接忠实粉丝。", ms: "认证", mt: "今日", ml: "直播中", int: "支持全球主流平台", ints: ['Douyin', 'Xiaohongshu', 'Pietra', 'WeChat', 'Tmall', 'Shopify'],
-    slides: [{t: "新款发布", d: "14:00 GMT", i: <ShoppingBag size={24}/>, v: "同步至店铺..."}, {t: "粉丝增长", d: "实时", i: <Heart size={24}/>, v: "+1,240 新粉丝"}, {t: "AI 变现", d: "数据优化", i: <TrendingUp size={24}/>, v: "+22% 预计收入"}] }
+  EN: { hero: "Your life in sync", sub: "The first AI-powered calendar bridging content, commerce, and community", cta: "Claim Access", succ: "Success!", b: "SyncSocial.ai — The future", ft: "Features", f1: "Commerce", f1d: "Sell merch directly.", f2: "AI Timing", f2d: "Optimized drops.", f3: "Audience", f3d: "Direct line to fans.", ms: "Verified", mt: "Timeline", ml: "Live", int: "Works with your stack", ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'Pinterest', 'Snapchat', 'Pietra', 'Stripe', 'Amazon'],
+    slides: [
+      {t:"08:00 Strategy", d:"AI scans global trends", i:<Search/>, s:"Scanning TikTok & Douyin..."},
+      {t:"09:30 Inventory", d:"Syncing with Shopify", i:<ShoppingBag/>, s:"Stock: 500 units ready"},
+      {t:"11:00 Content", d:"Generating briefings", i:<Zap/>, s:"Briefs sent to team"},
+      {t:"13:00 Multi-Sync", d:"Platform alignment", i:<Target/>, s:"IG, TikTok, YT aligned"},
+      {t:"15:00 Timing Fix", d:"AI optimizes drop time", i:<Clock/>, s:"Shifted to 19:45 (Peak)"},
+      {t:"17:00 Reminders", d:"Fans notified", i:<MessageSquare/>, s:"12k Calendars synced"},
+      {t:"19:45 LIVE DROP", d:"Merch is live", i:<TrendingUp/>, s:"Processing orders..."},
+      {t:"21:00 Analytics", d:"Revenue reporting", i:<BarChart3/>, s:"$14,200 Revenue generated"},
+      {t:"23:00 Retention", d:"AI schedules thanks", i:<Heart/>, s:"Loyalty loop started"}
+    ]},
+  NL: { hero: "Jouw leven in sync", sub: "De eerste AI-gedreven agenda die content, commerce en community verbindt", cta: "Claim toegang", succ: "Succes!", b: "SyncSocial.ai — De toekomst", ft: "Functies", f1: "Verkoop", f1d: "Verkoop vanuit agenda.", f2: "AI Timing", f2d: "Drop op piekmomenten.", f3: "Community", f3d: "Lijn met fans.", ms: "Geverifieerd", mt: "Tijdlijn", ml: "Nu Live", int: "Koppelt met je stack", ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'Pinterest', 'Snapchat', 'Mollie', 'Stripe'],
+    slides: [
+      {t:"08:00 Strategie", d:"AI scant trends", i:<Search/>, s:"TikTok & Douyin scan..."},
+      {t:"09:30 Voorraad", d:"Sync met Shopify", i:<ShoppingBag/>, s:"500 stuks gereed"},
+      {t:"11:00 Content", d:"Briefings maken", i:<Zap/>, s:"Briefings verzonden"},
+      {t:"13:00 Multi-Sync", d:"Platform uitlijning", i:<Target/>, s:"IG, TikTok, YT klaar"},
+      {t:"15:00 Timing Fix", d:"AI optimaliseert", i:<Clock/>, s:"Verplaatst naar 19:45"},
+      {t:"17:00 Notificaties", d:"Fans herinnerd", i:<MessageSquare/>, s:"12k agenda's gesynct"},
+      {t:"19:45 LIVE DROP", d:"Merch is live", i:<TrendingUp/>, s:"Orders verwerken..."},
+      {t:"21:00 Analyse", d:"Omzet rapport", i:<BarChart3/>, s:"€14.200 omzet behaald"},
+      {t:"23:00 Retentie", d:"AI plant bedankjes", i:<Heart/>, s:"Loyalty loop actief"}
+    ]}
 };
 
 export const IntegrationsSection = ({ c }) => (
