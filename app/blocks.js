@@ -6,43 +6,15 @@ export const Logo = ({ className }) => (
 );
 
 export const texts = {
-  EN: {
-    hero: "Your world, synchronized",
-    sub: "The first interactive timeline where life, content, and commerce happen instantly",
-    cta: "Claim Access", succ: "Success!", b: "SyncSocial.ai — The Living Calendar",
-    features: [
-      {t: "Live Interaction", d: "Join streams or start group meetings directly from your calendar cell.", i: <Video className="text-violet-500"/>},
-      {t: "Social Pulse", d: "Follow your friends' journeys live through synced GPS and video feeds.", i: <Globe className="text-violet-500"/>},
-      {t: "Instant Commerce", d: "Get notified of drops from brands you love and buy in one click.", i: <ShoppingBag className="text-violet-500"/>}
-    ],
-    slides: [
-      {t:"Group Sync", d:"Project Alpha Kickoff", i:<Users2/>, s:"Start Video Call Now", c: "bg-violet-600"},
-      {t:"Live Stream", d:"Tom's Amazon Trek", i:<Video/>, s:"Watch Live Feed", c: "bg-emerald-600"},
-      {t:"Brand Drop", d:"Nike x Sync Edition", i:<ShoppingBag/>, s:"Buy Now - 2min left", c: "bg-rose-600"}
-    ],
-    ints: ['Shopify', 'TikTok', 'Instagram', 'YouTube', 'Stripe', 'Amazon']
-  },
-  NL: {
-    hero: "Jouw wereld, gesynchroniseerd",
-    sub: "De eerste interactieve tijdlijn waar leven, content en commerce direct samenkomen",
-    cta: "Claim toegang", succ: "Succes!", b: "SyncSocial.ai — De Levende Agenda",
-    features: [
-      {t: "Live Interactie", d: "Start groepsmeetings of livestreams direct vanuit je agenda-item.", i: <Video className="text-violet-500"/>},
-      {t: "Sociale Pulse", d: "Volg reizen van vrienden live via gesynchroniseerde GPS en video.", i: <Globe className="text-violet-500"/>},
-      {t: "Directe Commerce", d: "Krijg meldingen van drops en koop direct met één klik.", i: <ShoppingBag className="text-violet-500"/>}
-    ],
-    slides: [
-      {t:"Groeps Sync", d:"Project Alpha Kickoff", i:<Users2/>, s:"Start Video Call", c: "bg-violet-600"},
-      {t:"Live Stream", d:"Tom's Amazon Reis", i:<Video/>, s:"Kijk Live Mee", c: "bg-emerald-600"},
-      {t:"Brand Drop", d:"Nike x Sync Edition", i:<ShoppingBag/>, s:"Koop Nu - 2min over", c: "bg-rose-600"}
-    ],
-    ints: ['Shopify', 'Instagram', 'TikTok', 'YouTube', 'Mollie', 'Stripe', 'Bol.com']
-  }
+  EN: { h: "Your world, in one place and always in sync", s: "The first interactive timeline where life, content, and commerce happen instantly", cta: "Claim Access", ok: "Success!", b: "SyncSocial.ai — The Living Calendar", ms: "Verified", mt: "Timeline", f: [{t: "Live Interaction", d: "Join streams or start group meetings directly from your calendar.", i: <Video/>},{t: "Social Pulse", d: "Follow your friends' journeys live through synced GPS and video.", i: <Globe/>},{t: "Instant Commerce", d: "Get notified of drops and buy in one click.", i: <ShoppingBag/>}], sl: [{t:"Group Sync", d:"Project Alpha Kickoff", i:<Users2/>, s:"Start Video Call Now", c: "bg-violet-600"},{t:"Live Stream", d:"Tom's Amazon Trek", i:<Video/>, s:"Watch Live Feed", c: "bg-emerald-600"},{t:"Brand Drop", d:"Nike x Sync Edition", i:<ShoppingBag/>, s:"Buy Now - 2min left", c: "bg-rose-600"}], i: ['Shopify','TikTok','Instagram','YouTube','Stripe','Pietra','Amazon'] },
+  NL: { h: "Jouw wereld, op één plek en altijd in sync", s: "De eerste interactieve tijdlijn waar leven, content en commerce direct samenkomen", cta: "Claim toegang", ok: "Succes!", b: "SyncSocial.ai — De Levende Agenda", ms: "Geverifieerd", mt: "Tijdlijn", f: [{t: "Live Interactie", d: "Start groepsmeetings of livestreams direct vanuit je agenda-item.", i: <Video/>},{t: "Sociale Pulse", d: "Volg reizen van vrienden live via gesynchroniseerde GPS en video.", i: <Globe/>},{t: "Directe Commerce", d: "Krijg meldingen van drops en koop direct met één klik.", i: <ShoppingBag/>}], sl: [{t:"Groeps Sync", d:"Project Alpha Kickoff", i:<Users2/>, s:"Start Video Call", c: "bg-violet-600"},{t:"Live Stream", d:"Tom's Amazon Reis", i:<Video/>, s:"Kijk Live Mee", c: "bg-emerald-600"},{t:"Brand Drop", d:"Nike x Sync Edition", i:<ShoppingBag/>, s:"Koop Nu - 2min over", c: "bg-rose-600"}], i: ['Shopify','TikTok','Instagram','YouTube','Mollie','Stripe','Bol.com'] },
+  ES: { h: "Tu mundo, en un solo lugar y siempre en sincronía", s: "La primera línea de tiempo interactiva donde la vida y el comercio ocurren al instante", cta: "Solicitar Acceso", ok: "¡Éxito!", b: "SyncSocial.ai — Calendario Vivo", ms: "Verificado", mt: "Línea de tiempo", f: [{t: "Interacción", d: "Únete a transmisiones o reuniones directamente.", i: <Video/>},{t: "Pulso Social", d: "Sigue viajes en vivo vía GPS y video.", i: <Globe/>},{t: "Comercio", d: "Notificaciones de drops y compra en un clic.", i: <ShoppingBag/>}], sl: [{t:"Sync Grupal", d:"Kickoff Proyecto", i:<Users2/>, s:"Iniciar Llamada", c: "bg-violet-600"},{t:"Stream", d:"Viaje de Tom", i:<Video/>, s:"Ver en Vivo", c: "bg-emerald-600"},{t:"Brand Drop", d:"Edición Nike", i:<ShoppingBag/>, s:"Comprar Ahora", c: "bg-rose-600"}], i: ['Shopify','TikTok','Instagram','YouTube','Stripe','Mercado Libre'] },
+  CN: { h: "你的世界，汇于一处，永远同步", s: "连接生活、内容与商业的第一个交互式时间轴", cta: "立即加入", ok: "成功！", b: "SyncSocial.ai — 动态日历", ms: "认证", mt: "时间轴", f: [{t: "实时交互", d: "直接从日历项加入流媒体或会议。", i: <Video/>},{t: "社交脉搏", d: "通过同步的GPS和视频关注朋友。", i: <Globe/>},{t: "即时商业", d: "获取品牌发布通知，一键购买。", i: <ShoppingBag/>}], sl: [{t:"群组同步", d:"项目启动", i:<Users2/>, s:"立即通话", c: "bg-violet-600"},{t:"直播", d:"野外探险直播", i:<Video/>, s:"点击观看", c: "bg-emerald-600"},{t:"品牌发布", d:"联名首发", i:<ShoppingBag/>, s:"立即购买", c: "bg-rose-600"}], i: ['Douyin','Xiaohongshu','Pietra','WeChat','Tmall','Shopify'] }
 };
 
 export const IntegrationsSection = ({ c }) => (
   <div className="py-20 relative z-10 w-full border-t border-slate-50"><p className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-12">Universal Integration</p>
     <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 max-w-4xl mx-auto opacity-30 grayscale hover:grayscale-0 transition-all">
-      {c.ints.map((p) => (<span key={p} className="font-black text-lg lg:text-xl text-slate-900 tracking-tighter italic whitespace-nowrap">{p}</span>))}
+      {c.i.map((p) => (<span key={p} className="font-black text-lg lg:text-xl text-slate-900 tracking-tighter italic whitespace-nowrap">{p}</span>))}
     </div></div>
 );
