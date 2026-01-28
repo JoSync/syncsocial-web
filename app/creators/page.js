@@ -1,38 +1,56 @@
-import React from 'react';
-import { ShoppingBag, Zap, Heart, BarChart3, Search, Clock, Target, Users, Globe, Video, Users2, ShieldCheck } from 'lucide-react';
+"use client";
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, Sparkles, BarChart3, Globe } from 'lucide-react';
+import { BACKGROUND_SVG } from '../assets';
+import { Logo, texts, IntegrationsSection } from '../blocks';
 
-export const Logo = ({ className }) => (
-  <svg viewBox="0 0 128 128" className={className} fill="none"><defs><linearGradient id="cg" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" stopColor="#FF00E4" /><stop offset="100%" stopColor="#8B5CF6" /></linearGradient></defs><path d="M95,35 C95,15 65,15 65,35 C65,55 95,73 95,93 C95,113 65,113 65,93 M35,93 C35,113 65,113 65,93 C65,73 35,55 35,35 C35,15 65,15 65,35" stroke="url(#cg)" strokeWidth="14" strokeLinecap="round" strokeLinejoin="round"/></svg>
-);
+export default function CreatorsPage() {
+  const [lang, setLang] = useState('EN'); const [curr, setCurr] = useState(0);
+  const [email, setEmail] = useState(''); const [isSub, setIsSub] = useState(false);
+  const c = texts[lang] || texts['EN'];
+  const sl = [
+    {t:"08:00 Strategy", d:"AI scans global trends", x:"Scanning TikTok..."},
+    {t:"09:30 Inventory", d:"Syncing with Shopify", x:"Stock: 500 units ready"},
+    {t:"13:00 Multi-Sync", d:"Platform alignment", x:"IG, TikTok, YT aligned"},
+    {t:"15:00 Timing Fix", d:"AI optimizes drop", x:"Shifted to 19:45 (Peak)"},
+    {t:"19:45 LIVE DROP", d:"Merch is live", x:"Processing orders..."},
+    {t:"21:00 Analytics", d:"Revenue reporting", x:"$14,200 Revenue generated"}
+  ];
 
-const sl_gen = [
-  {t:"Group Sync", d:"Project Alpha", i:<Users2/>, s:"Start Video Call", c: "bg-violet-600"},
-  {t:"Live Stream", d:"Tom's Trek", i:<Video/>, s:"Watch Live Feed", c: "bg-emerald-600"},
-  {t:"Brand Drop", d:"Nike Edition", i:<ShoppingBag/>, s:"Buy Now", c: "bg-rose-600"}
-];
+  useEffect(() => { const sI = setInterval(() => setCurr((p) => (p + 1) % sl.length), 3500); return () => clearInterval(sI); }, [sl.length]);
 
-export const texts = {
-  EN: { h1: "Your world in one place", h2: "always in sync", s: "The first interactive timeline where life and commerce happen instantly", cta: "Claim Access", ok: "Success!", b: "SyncSocial.ai — The Living Calendar", ms: "Verified", mt: "Timeline", 
-    f: [{t: "Live Interaction", d: "Join streams or meetings directly.", i: <Video/>},{t: "Social Pulse", d: "Follow friends live via GPS.", i: <Globe/>},{t: "Instant Commerce", d: "Buy drops in one click.", i: <ShoppingBag/>}], 
-    p: { creators: { s: "Turn your schedule into a revenue machine." }, users: { s: "Never miss a beat from your favorite people." }, brands: { s: "Partner with creators at the peak of engagement." } },
-    sl: sl_gen, i: ['Shopify','TikTok','Instagram','YouTube','Stripe','Pietra'] },
-  NL: { h1: "Jouw wereld op één plek", h2: "altijd in sync", s: "De eerste interactieve tijdlijn waar leven en commerce direct samenkomen", cta: "Claim toegang", ok: "Succes!", b: "SyncSocial.ai — De Levende Agenda", ms: "Geverifieerd", mt: "Tijdlijn", 
-    f: [{t: "Live Interactie", d: "Start meetings direct vanuit je agenda.", i: <Video/>},{t: "Sociale Pulse", d: "Volg reizen van vrienden live.", i: <Globe/>},{t: "Directe Commerce", d: "Koop drops met één klik.", i: <ShoppingBag/>}], 
-    p: { creators: { s: "Maak van je agenda een winstmachine." }, users: { s: "Mis nooit meer een moment van je favorieten." }, brands: { s: "Partner met creators op het piekmoment." } },
-    sl: sl_gen, i: ['Shopify','TikTok','Instagram','YouTube','Mollie','Stripe'] },
-  ES: { h1: "Tu mundo en un lugar", h2: "siempre en sincronía", s: "La primera línea de tiempo donde la vida y el comercio ocurren al instante", cta: "Acceso", ok: "¡Éxito!", b: "SyncSocial.ai", ms: "Verificado", mt: "Línea", 
-    f: [{t: "Interacción", d: "Únete a transmisiones directamente.", i: <Video/>},{t: "Pulso Social", d: "Sigue viajes en vivo.", i: <Globe/>},{t: "Comercio", d: "Drops y compras en un clic.", i: <ShoppingBag/>}], 
-    p: { creators: { s: "Tu agenda es dinero." }, users: { s: "No te pierdas nada." }, brands: { s: "Engagement máximo." } },
-    sl: sl_gen, i: ['Shopify','Stripe','Instagram'] },
-  CN: { h1: "你的世界，汇于一处", h2: "永远同步", s: "连接生活与商业的第一个交互式时间轴", cta: "立即加入", ok: "成功！", b: "SyncSocial.ai", ms: "认证", mt: "时间轴", 
-    f: [{t: "实时交互", d: "直接从日历项加入会议。", i: <Video/>},{t: "社交脉搏", d: "通过同步关注朋友。", i: <Globe/>},{t: "即时商业", d: "一键购买品牌首发。", i: <ShoppingBag/>}], 
-    p: { creators: { s: "日程即收入。" }, users: { s: "永不错过。" }, brands: { s: "合作伙伴。" } },
-    sl: sl_gen, i: ['Douyin','Xiaohongshu','Shopify'] }
-};
-
-export const IntegrationsSection = ({ c }) => (
-  <div className="py-20 relative z-10 w-full border-t border-slate-50"><p className="text-[10px] font-black uppercase text-slate-400 tracking-[0.2em] mb-12">Universal Integration</p>
-    <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 max-w-4xl mx-auto opacity-30 grayscale hover:grayscale-0 transition-all">
-      {c?.i?.map((p) => (<span key={p} className="font-black text-lg lg:text-xl text-slate-900 tracking-tighter italic whitespace-nowrap">{p}</span>))}
-    </div></div>
-);
+  return (
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-violet-100 overflow-x-hidden relative">
+      <div className="absolute inset-0 -z-10 opacity-[0.1]" style={{ backgroundImage: BACKGROUND_SVG }}></div>
+      <nav className="p-8 max-w-7xl mx-auto flex justify-between items-center relative z-50">
+        <Link href="/" className="flex items-center gap-2 text-slate-400 hover:text-violet-600 transition-colors font-black uppercase text-xs tracking-widest"><ArrowLeft size={16}/> Back</Link>
+        <div className="flex items-center gap-2"><Logo className="w-8 h-8" /><span className="text-xl font-black text-violet-950 italic">SyncSocial<span className="text-violet-600">.Creators</span></span></div>
+      </nav>
+      <main className="max-w-7xl mx-auto px-6 py-12 grid lg:grid-cols-2 gap-20 items-center">
+        <div className="space-y-8 text-left">
+          <div className="inline-flex items-center gap-2 bg-violet-50 text-violet-700 px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-widest"><Sparkles size={12} /> Creator Mode</div>
+          <h1 className="text-6xl lg:text-7xl font-black tracking-tighter text-violet-950 leading-[0.9] italic uppercase">Turn your life<br/><span className="text-violet-600">into a business</span></h1>
+          <p className="text-xl text-slate-500 font-medium italic leading-relaxed max-w-xl">{c.p.creators.s}</p>
+          <div className="w-full max-w-md">
+            {!isSub ? (<form onSubmit={(e)=>{e.preventDefault();setIsSub(true)}} className="flex flex-col shadow-2xl rounded-[3rem] overflow-hidden border border-violet-100 bg-white"><input type="email" required value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Enter creator email" className="h-16 px-10 outline-none text-lg" /><button type="submit" className="h-16 bg-violet-950 text-white font-black text-lg hover:bg-violet-600 transition-all uppercase flex items-center justify-center gap-2">Claim Creator Access <ArrowRight size={20}/></button></form>
+            ) : (<div className="bg-emerald-50 border-2 border-emerald-100 p-6 rounded-[3rem] flex items-center gap-4 animate-scale-in shadow-lg"><CheckCircle2 size={24} className="text-emerald-500" /><p className="text-emerald-800 font-black italic">You are on the list, Creator.</p></div>)}
+          </div>
+        </div>
+        <div className="relative"><div className="absolute -inset-10 bg-violet-500/20 blur-[100px] rounded-full"></div>
+          <div className="relative bg-violet-950 rounded-[4rem] p-3 shadow-3xl border-[12px] border-violet-900 overflow-hidden"><div className="bg-white rounded-[3rem] overflow-hidden h-[600px] flex flex-col relative text-left">
+              <div className="bg-violet-950 p-1 flex gap-1">{sl.map((_,i)=>(<div key={i} className={`h-1 flex-1 rounded-full transition-all duration-500 ${i<=curr?'bg-violet-400':'bg-violet-900/30'}`}></div>))}</div>
+              <div className="p-8 flex justify-between items-center border-b border-slate-50"><div className="flex items-center gap-3"><div className="w-12 h-12 bg-violet-950 rounded-full flex items-center justify-center text-white font-black text-xl border-2 border-white shadow-md">MS</div><div><p className="font-black text-violet-950 text-sm italic">Creator Dashboard</p><p className="text-[10px] text-emerald-500 font-black uppercase flex items-center gap-1 mt-1"><ShieldCheck size={10} /> Sync Active</p></div></div><Globe size={20} className="text-violet-600 animate-spin-slow" /></div>
+              <div className="flex-1 p-10 bg-slate-50/50 flex flex-col justify-center"><div key={curr} className="animate-fade-in space-y-6"><div className="bg-white p-8 rounded-[2.5rem] shadow-xl border border-violet-100"><p className="text-3xl font-black text-violet-950 italic leading-none mb-2">{sl[curr].t}</p><p className="text-sm font-bold text-slate-400 uppercase tracking-widest">{sl[curr].d}</p></div><div className="bg-violet-950 p-6 rounded-[2rem] shadow-lg flex items-center justify-between"><span className="text-xs font-black text-violet-200 uppercase tracking-widest">{sl[curr].x}</span><BarChart3 className="text-emerald-400" size={20}/></div></div></div>
+            </div></div></div>
+      </main>
+      <div className="max-w-7xl mx-auto px-6 pb-32"><IntegrationsSection c={c} /></div>
+      <style jsx global>{`
+        @keyframes fade-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-in { animation: fade-in 0.6s ease-out forwards; }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 12s linear infinite; }
+      `}</style>
+    </div>
+  );
+}
